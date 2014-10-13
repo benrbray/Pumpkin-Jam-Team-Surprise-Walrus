@@ -19,10 +19,10 @@ Levels[0] = new Level("Test Level", function(){
 	World.addTree(12,13);
 	
 	
-	World.addHuman(5,5);
-	World.addHuman(5,6);
-	World.addHuman(5,7);
-	World.addHuman(5,9);
+	World.addHuman(6,5);
+	World.addHuman(6,6);
+	World.addHuman(6,7);
+	World.addHuman(6,9);
 	
 	// Spawn Trees
 	// Spawn Mortals
