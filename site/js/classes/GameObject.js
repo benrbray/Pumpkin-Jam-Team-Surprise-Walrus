@@ -27,21 +27,26 @@ GameObject.prototype.draw = function(){
 
 GameObject.prototype.update = function(){
 	// Apply friction (linear deceleration)
-	this.vx = sign(this.vx) * Math.max(0, Math.abs(this.vx) - this.friction);
-	this.vy = sign(this.vy) * Math.max(0, Math.abs(this.vy) - this.friction);
-	
+	//this.vx = sign(this.vx) * Math.max(0, Math.abs(this.vx) - this.friction);
+	//this.vy = sign(this.vy) * Math.max(0, Math.abs(this.vy) - this.friction);
 	// Limit speed
 	var speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-	if (speed > this.maxSpeed) {
-		this.vx *= this.maxSpeed / speed;
-		this.vy *= this.maxSpeed / speed;
+	if (speed > 0) {
+		this.vx /= speed;
+		this.vy /= speed;
 	}
+	speed = Math.max(0,Math.min(speed - this.friction, this.maxSpeed));
+	this.vx *= speed;
+	this.vy *= speed;
 	// Think According to Type
 	this.brain(this);
 	
 	// Accelerate
-	this.vx += Math.max(-1,Math.min(this.wx,1)) * this.acceleration;
-	this.vy += Math.max(-1,Math.min(this.wy,1)) * this.acceleration;
+	var wm = Math.sqrt(this.wx * this.wx + this.wy * this.wy);
+	if (wm > 0) {
+		this.vx += this.wx / wm * this.acceleration;
+		this.vy += this.wy / wm * this.acceleration;
+	}
 
 	// Do physics
 	var m = World.move(this.x, this.y,0.4, this.vx, this.vy);
