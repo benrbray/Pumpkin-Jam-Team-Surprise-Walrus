@@ -1,14 +1,22 @@
-////////////////////////////////////////////////////////////////////////////////
+//// KEY MAP ///////////////////////////////////////////////////////////////////
+
+var KeyMap = {};
+KeyMap[65] = KeyMap[37] = "LEFT";
+KeyMap[87] = KeyMap[38] = "UP";
+KeyMap[68] = KeyMap[39] = "RIGHT";
+KeyMap[83] = KeyMap[40] = "DOWN";
+KeyMap[32] = "SPACE";
+
 var Keyboard = {};
 
+//// KEY EVENTS ////////////////////////////////////////////////////////////////
+
 function documentKeyUp(e) {
-	// e.keyCode is a number representing key (ASCII for those)
-	Keyboard[String.fromCharCode(e.keyCode)] = false;
+	Keyboard[KeyMap[e.keyCode] || String.fromCharCode(e.keyCode)] = false;
 }
 
 function documentKeyDown(e) {
-	// e.keyCode is a number representing key (ASCII for those)
-	Keyboard[String.fromCharCode(e.keyCode)] = true;
+	Keyboard[KeyMap[e.keyCode] || String.fromCharCode(e.keyCode)] = true;
 }
 
 function documentMouseDown(e) {
