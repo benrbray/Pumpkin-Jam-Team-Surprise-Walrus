@@ -24,8 +24,10 @@ Camera.contains = function(x, y){
 }
 
 Camera.fromScreen = function(sx,sy) {
-	var tilesVertical = Camera.tilesHorizontal * SCREEN_HEIGHT / SCREEN_WIDTH;
-	var worldX = sx * Camera.tilesHorizontal / SCREEN_WIDTH + Camera.x;
-	var worldY = sy * tilesVertical / SCREEN_HEIGHT + Camera.y;
+	sx -= WINDOW_WIDTH / 2;
+	sy -= WINDOW_HEIGHT / 2;
+	var tilesVertical = Camera.tilesHorizontal * WINDOW_HEIGHT / WINDOW_WIDTH;
+	var worldX = sx * Camera.tilesHorizontal / WINDOW_WIDTH + Camera.x;
+	var worldY = sy * tilesVertical / WINDOW_HEIGHT + Camera.y;
 	return [worldX,worldY];
 }

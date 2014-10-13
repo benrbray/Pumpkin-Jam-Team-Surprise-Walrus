@@ -7,6 +7,10 @@ KeyMap[68] = KeyMap[39] = "RIGHT";
 KeyMap[83] = KeyMap[40] = "DOWN";
 KeyMap[32] = "SPACE";
 
+var Mouse = {};
+Mouse.x = 5;
+Mouse.y = 5;
+
 var Keyboard = {};
 
 //// KEY EVENTS ////////////////////////////////////////////////////////////////
@@ -21,13 +25,19 @@ function documentKeyDown(e) {
 
 function documentMouseDown(e) {
 	// offsetX, offsetY
-	
+	documentMouseMove(e);
+	Mouse.down = true;
 }
 function documentMouseUp(e) {
 	// offsetX, offsetY
-	
+	documentMouseMove(e);
+	Mouse.down = false;
 }
 function documentMouseMove(e) {
 	// offsetX, offsetY
-	
+	Mouse.x = e.offsetX;
+	Mouse.y = e.offsetY;
+	var world = Camera.fromScreen(Mouse.x,Mouse.y);
+	Mouse.worldx = world[0];
+	Mouse.worldy = world[1];
 }

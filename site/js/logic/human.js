@@ -50,7 +50,7 @@ function humanThink(h) {
 
 		var nearestThreat = nearestWolf(h.x,h.y);
 
-		if (h.fear > (h.bold * 10 + 15) / 2 &&
+		if (h.fear > 16 &&
 				World.visible(h.x,h.y, nearestThreat.x,nearestThreat.y)) {
 			// Behave according to bold
 			if (h.bold < 0) {
