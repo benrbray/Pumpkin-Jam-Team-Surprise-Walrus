@@ -42,3 +42,9 @@ CanvasRenderingContext2D.prototype.strokeCircle = function(x,y,radius){
 	this.arc(x,y,radius,0,2*Math.PI);
 	this.stroke();
 }
+
+function assert(condition, message) {
+	if (!condition) {
+		throw message || "Assertion failed";
+	}
+}

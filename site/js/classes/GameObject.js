@@ -70,6 +70,7 @@ GameObject.gameObjects = [];
 
 // Adds a GameObject to the drawing stage
 GameObject.add = function(gameObject){
+	assert( GameObject.gameObjects.indexOf(gameObject) === -1 , "Object " + gameObject + " already inserted to game objects");
 	GameObject.gameObjects.push(gameObject);
 	return gameObject;
 }
