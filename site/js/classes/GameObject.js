@@ -15,12 +15,17 @@ function GameObject(x, y, gameAsset){
 }
 
 GameObject.prototype.draw = function(){
-	this.gameAsset.draw(this.x, this.y);
+	this.gameAsset.draw(this.x - 0.5, this.y - 0.5);
 }
 
 GameObject.prototype.update = function(){
-	this.x += this.vx;
-	this.y += this.vy;
+	//this.x += this.vx;
+	//this.y += this.vy;
+	var m = World.move(this.x, this.y,0.5, this.vx, this.vy);
+	this.x = m[0];
+	this.y = m[1];
+	this.vx *= m[2];
+	this.vy *= m[3];
 }
 
 GameObject.gameObjects = [];

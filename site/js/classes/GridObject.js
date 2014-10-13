@@ -11,8 +11,9 @@ function GridObject(xTile, yTile, gameAsset){
 	for (var x = 0; x < gameAsset.width; x++) {
 		for (var y = 0; y < gameAsset.height; y++) {
 			if (gameAsset.walkGrid[x][y]) {
+				
 				World.grid[
-					this.xTile + x - HalfWidth
+					this.xTile + x - halfWidth
 				][
 					this.yTile + y - halfHeight
 				] = true;

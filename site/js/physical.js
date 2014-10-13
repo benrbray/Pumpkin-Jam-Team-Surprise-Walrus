@@ -1,6 +1,12 @@
 var World = {};
 World.grid = [];
 World.size = 128;
+for (var i = 0; i < World.size; i++) {
+	World.grid[i] = [];
+	for (var j = 0; j < World.size; j++) {
+		World.grid[i][j] = false;
+	}
+}
 
 World.isSolid = function(x,y) {
 	if (x < 0 || y < 0) {
