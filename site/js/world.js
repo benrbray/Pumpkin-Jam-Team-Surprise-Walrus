@@ -1,6 +1,17 @@
+/* WORLD.JS
+ * Hi Curtis, please explain what this file does.
+ */
+
+"use strict";
+
+////////////////////////////////////////////////////////////////////////////////
+
+// Define World grid
 var World = {};
 World.grid = [];
 World.size = 128;
+
+// Initialize World grid to be entirely walkable
 for (var i = 0; i < World.size; i++) {
 	World.grid[i] = [];
 	for (var j = 0; j < World.size; j++) {
@@ -8,18 +19,23 @@ for (var i = 0; i < World.size; i++) {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+/* WORLD.ISSOLID
+ * Determine if a grid point is solid or not.
+ */
 World.isSolid = function(x,y) {
-	if (x < 0 || y < 0) {
-		return true;
-	}
-	if (x >= World.size || y >= World.size) {
-		return true;
-	}
+	// Check if out of world bounds
+	if (x < 0 || y < 0) { return true; }
+	if (x >= World.size || y >= World.size) { return true; }
+	// Otherwise read from grid
 	return World.grid[x << 0][y << 0];
 }
 
-// Does an object of "radius" r (dimensions 2r x 2r) 
-// fit at position (x,y)? (Center of box)
+/* WORLD.HASSPACE
+ * Does an object of "radius" r (dimensions 2r x 2r) 
+ * fit at position (x,y)? (Center of box)
+ */
 World.hasSpace = function(x,y,r) {
 	var cannotMove = false;
 	for (var u = -1; u <= 1; u++) {
@@ -30,25 +46,28 @@ World.hasSpace = function(x,y,r) {
 	return !cannotMove;
 }
 
-// Computes movement from position (x,y) with velocity
-// (in this frame) (vx,vy) 
-// The box has "radius" r (dimensions 2r x 2r)
-//      (for now less than 0.5 -- soon less than 1)
-// ||(vx, vy)|| must be less than 0.5 for in general correct behavior
-// Returns [newx, newy, % velocity horizontal used, % velocity vertical used]
+/* WORLD.MOVE
+ * Computes movement from position (x,y) with velocity (in this frame) (vx,vy) 
+ * The box has "radius" r (dimensions 2r x 2r)
+ *      (for now less than 0.5 -- soon less than 1)
+ * ||(vx, vy)|| must be less than 0.5 for in general correct behavior
+ * Returns [newx, newy, % velocity horizontal used, % velocity vertical used]
+ */
 World.move = function(x,y , r, vx,vy) {
 	// RESULTS OFF BY A VERY SMALL AMOUNT
 	var canMove = World.hasSpace(x + vx,y + vy,r);
+	
 	if (canMove) {
 		return [x + vx, y + vy, 1, 1];
 	} else {
-		var mvx = Math.abs(vx); // Horizontal speed
-		var mvy = Math.abs(vy); // Vertical speed
-		var dvx = sign(vx); // Horizontal direction
-		var dvy = sign(vy); // Vertical directino
-		var mx = 0; // Horizontal movement amount
-		var my = 0; // Vertical momvement amount
+		var mvx = Math.abs(vx);	// Horizontal speed
+		var mvy = Math.abs(vy);	// Vertical speed
+		var dvx = sign(vx); 	// Horizontal direction
+		var dvy = sign(vy);		// Vertical directino
+		var mx = 0;				// Horizontal movement amount
+		var my = 0;				// Vertical momvement amount
 		var step = 0.01;
+		
 		if (mvx > mvy) {
 			// Compute x movement first
 			for (var i = mvx; i >= 0; i -= step) {
