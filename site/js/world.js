@@ -1,5 +1,9 @@
 /* WORLD.JS
- * Hi Curtis, please explain what this file does.
+ * Sets-up the solid grid defining the walkability of the world
+ * Includes World.isSolid and World.hasSpace to detect whether or not
+ * different motions are allowed.
+ * Impliments World.move to encapsulate all motion computation,
+ * regarding the obstacles in the world.
  */
 
 "use strict";
@@ -8,16 +12,18 @@
 
 // Define World grid
 var World = {};
-World.grid = [];
-World.size = 128;
-
-// Initialize World grid to be entirely walkable
-for (var i = 0; i < World.size; i++) {
-	World.grid[i] = [];
-	for (var j = 0; j < World.size; j++) {
-		World.grid[i][j] = false;
+World.clear = function(size) {
+	World.grid = [];
+	World.size = size;
+	// Initialize World grid to be entirely walkable
+	for (var i = 0; i < World.size; i++) {
+		World.grid[i] = [];
+		for (var j = 0; j < World.size; j++) {
+			World.grid[i][j] = false;
+		}
 	}
 }
+World.clear(128);
 
 ////////////////////////////////////////////////////////////////////////////////
 
