@@ -31,6 +31,7 @@ function draw() {
 	
 	// Draw World
 	GridObject.drawAll();
+	GameObject.drawAll();
 	
 	// Reset Canvas Coordinates for drawing GUI
 	context.setTransform(1,0,0,1,0,0);
