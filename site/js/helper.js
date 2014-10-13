@@ -4,6 +4,14 @@ function sign(x) {
 	return x?x<0?-1:1:0;
 }
 
+function magnitude(x,y) {
+	return Math.sqrt(x * x + y * y);
+}
+
+function distance(a,b,x,y) {
+	return magnitude(x-a,y-b);
+}
+
 // converts RGBA to HTML color string
 function htmlColor(r, g, b, a) {
 	// ensure alpha is a number
