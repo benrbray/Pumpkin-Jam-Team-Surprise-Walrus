@@ -9,7 +9,7 @@
 var Camera = {
 	x:	0,	// tiles
 	y:	0,	// tiles
-	tilesHorizontal:	20
+	tilesHorizontal:	14
 }
 
 /* CAMERA.CONTAINS
