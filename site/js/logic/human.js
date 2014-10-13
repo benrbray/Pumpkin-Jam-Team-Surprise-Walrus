@@ -52,8 +52,14 @@ function humanThink(h) {
 			h.running = 180 - h.bold * 120;
 		}
 		// Standard motion: Walk near to homex, homey
-		h.wx = h.homex + Math.cos(h.randomDirection) * 3 - h.x;
-		h.wy = h.homey + Math.sin(h.randomDirection) * 3 - h.y;
+		var tx = h.homex + Math.cos(h.randomDirection) * 3; // Target position
+		var ty = h.homey + Math.sin(h.randomDirection) * 3;
+		h.wx = tx - h.x;
+		h.wy = ty - h.y;
+		if (  (h.x-tx)*(h.x-tx) + (h.y-ty)*(h.y-ty) < 0.1 * 0.1  ) {
+			h.wx = 0;
+			h.wy = 0;
+		}
 
 		var nearestThreat = nearestWolf(h.x,h.y);
 
