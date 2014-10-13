@@ -21,14 +21,10 @@ function GameObject(x, y, gameAsset, brain){
 }
 
 GameObject.prototype.draw = function(){
+	// Draw Asset
 	this.gameAsset.draw(this.x, this.y, this);
-	//this.gameAsset.draw(this.x - this.gameAsset.width / 2, this.y - this.gameAsset.height / 2);
-}
 
 GameObject.prototype.update = function(){
-	// Apply friction (linear deceleration)
-	//this.vx = sign(this.vx) * Math.max(0, Math.abs(this.vx) - this.friction);
-	//this.vy = sign(this.vy) * Math.max(0, Math.abs(this.vy) - this.friction);
 	// Limit speed
 	var speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
 	if (speed > 0) {
