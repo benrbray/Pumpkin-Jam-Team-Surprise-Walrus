@@ -49,11 +49,6 @@ function PlayerThink(player) {
 function gameUpdate(){
 	draw();
 	requestAnimationFrame(gameUpdate);
-	// Move Player
-	// if (Keyboard.LEFT)  { player.vx -= player.speed; }
-	// if (Keyboard.RIGHT) { player.vx += player.speed; }
-	// if (Keyboard.UP)	   { player.vy -= player.speed; }
-	// if (Keyboard.DOWN)  { player.vy += player.speed; }
 
 	// Move Camera
 	Camera.x = Camera.x * 0.7 + player.x * 0.3;
