@@ -18,6 +18,7 @@ function humanThink(h) {
 		h.homey = h.y;
 		h.maxSpeed = .02;
 		h.friction = 0.01;
+		h.human = true;
 	}
 	// Human Properties
 	/*

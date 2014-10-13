@@ -21,7 +21,8 @@ function GameObject(brain, x, y, gameAsset){
 }
 
 GameObject.prototype.draw = function(){
-	this.gameAsset.draw(this.x - this.gameAsset.width / 2, this.y - this.gameAsset.height / 2);
+	this.gameAsset.draw(this.x, this.y, this);
+	//this.gameAsset.draw(this.x - this.gameAsset.width / 2, this.y - this.gameAsset.height / 2);
 }
 
 GameObject.prototype.update = function(){
@@ -48,6 +49,13 @@ GameObject.prototype.update = function(){
 	this.y = m[1];
 	this.vx *= m[2];
 	this.vy *= m[3];
+}
+
+GameObject.prototype.die = function() {
+	var where = GameObject.gameObjects.indexOf(this);
+	if (where >= 0) {
+		GameObject.gameObjects.splice(where,1);
+	}
 }
 
 //// STATIC FUNCTIONS //////////////////////////////////////////////////////////
