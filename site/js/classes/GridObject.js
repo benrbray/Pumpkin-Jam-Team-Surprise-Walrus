@@ -28,6 +28,13 @@ function GridObject(xTile, yTile, gameAsset){
  
 ////////////////////////////////////////////////////////////////////////////////
 
+// TODO:  GridObject.worldInit() adds and keeps track of all static objects
+
+// Adds a GridObject to the stage to be drawn
+GridObject.add = function(gridObject){
+	GridObject.gridObjects.push(gridObject);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
  
 GridObject.gridObjects = [];

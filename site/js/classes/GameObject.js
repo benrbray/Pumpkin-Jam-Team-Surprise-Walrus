@@ -28,6 +28,7 @@ GameObject.prototype.update = function(){
 	// Apply friction (linear deceleration)
 	this.vx = sign(this.vx) * Math.max(0, Math.abs(this.vx) - this.friction);
 	this.vy = sign(this.vy) * Math.max(0, Math.abs(this.vy) - this.friction);
+	
 	// Limit speed
 	var speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
 	if (speed > this.maxSpeed) {
@@ -36,6 +37,7 @@ GameObject.prototype.update = function(){
 	}
 	// Think According to Type
 	this.brain(this);
+	
 	// Accelerate
 	this.vx += Math.max(-1,Math.min(this.wx,1)) * this.acceleration;
 	this.vy += Math.max(-1,Math.min(this.wy,1)) * this.acceleration;
@@ -48,7 +50,13 @@ GameObject.prototype.update = function(){
 	this.vy *= m[3];
 }
 
+//// STATIC FUNCTIONS //////////////////////////////////////////////////////////
+
 GameObject.gameObjects = [];
+
+GameObject.add = function(gameObject){
+	GameObject.gameObjects.push(gameObject);
+}
 
 GameObject.drawAll = function(){
 	var gameObjects = GameObject.gameObjects;

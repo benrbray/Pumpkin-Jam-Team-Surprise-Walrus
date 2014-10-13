@@ -17,10 +17,15 @@ function GameAsset(width, height, walkGrid, path){
 	var randomRed = Math.random() * 255;
 	var randomGreen = Math.random() * 255;
 	var randomBlue = Math.random() * 255;
+	
 	this.draw = function(x,y){
 		// TODO
-
 		context.fillStyle = htmlColor(randomRed, randomGreen, randomBlue);
 		context.fillRect(x,y, this.width, this.height);
 	}
 }
+
+//// PREDEFINED ASSETS /////////////////////////////////////////////////////////
+
+GameAsset.tree = new GameAsset(1,1,[[true]], null);
+GameAsset.player = new GameAsset(0.8, 0.8, [[false]], null);

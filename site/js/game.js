@@ -10,38 +10,18 @@ var player = null;
 
 function gameInit(){
 	// Test Objects
-	var g = new GridObject(1,1, new GameAsset(1,1,[[true]],null));
-	GridObject.gridObjects.push(g);
+	var g = new GridObject(10,10, GameAsset.tree);
+	GridObject.add(g);
 	
-	var g = new GridObject(0,0, new GameAsset(1,1,[[true]],null));
-	GridObject.gridObjects.push(g);
+	var g = new GridObject(10,11, GameAsset.tree);
+	GridObject.add(g);
 	
-	var g = new GridObject(2,3, new GameAsset(1,1,[[true]],null));
-	GridObject.gridObjects.push(g);
+	var g = new GridObject(12,13, GameAsset.tree);
+	GridObject.add(g);
 	
 	// Define Player
-	player = new GameObject(playerThink, 4, 0.5, new GameAsset(0.8,0.8,[],null));
-	GameObject.gameObjects.push(player);
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-function playerThink(player) {
-	player.wx = 0;
-	player.wy = 0;
-	if (Keyboard.LEFT)  {
-		player.wx = -1;
-	}
-	if (Keyboard.RIGHT) {
-		player.wx = 1;
-	}
-	if (Keyboard.UP)    {
-		player.wy = -1;
-	}
-	if (Keyboard.DOWN)  {
-		player.wy = 1;
-	}
+	player = new GameObject(playerThink, 4, 1, GameAsset.player);
+	GameObject.add(player);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
