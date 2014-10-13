@@ -12,7 +12,6 @@ Levels[0] = new Level("Test Level", function(){
 	
 	// Define Player
 	var player = World.addPlayer(1,1);
-	GameObject.add(player);
 	
 	// Manually add trees
 	World.addTree(10,10);

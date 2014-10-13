@@ -135,7 +135,6 @@ World.move = function(x,y , r, vx,vy) {
 
 World.addPlayer = function(x, y){
 	World.player = GameObject.add(new GameObject(x, y, GameAsset.player, playerThink));
-	return World.player;
 }
 World.addTree = function(x, y){
 	var trunk = new GridObject(x, y, GameAsset.treeTrunk);
