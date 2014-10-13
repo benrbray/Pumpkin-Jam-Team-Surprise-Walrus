@@ -11,17 +11,34 @@ function GameObject(x, y, gameAsset){
 	this.y = y;		// y position (tiles)
 	this.vx = 0;	// x velocity (tiles/frame)
 	this.vy = 0;	// y velocity (tiles/frame)
+	this.wx = 0;	// Walking horizontal
+	this.wy = 0;	// Walking vertical
+	this.acceleration = 0.03;
+	this.maxSpeed = .11;
+	this.friction = 0.02;
 	this.gameAsset = gameAsset;
 }
 
 GameObject.prototype.draw = function(){
-	this.gameAsset.draw(this.x - 0.5, this.y - 0.5);
+	this.gameAsset.draw(this.x - this.gameAsset.width / 2, this.y - this.gameAsset.height / 2);
 }
 
 GameObject.prototype.update = function(){
-	//this.x += this.vx;
-	//this.y += this.vy;
-	var m = World.move(this.x, this.y,0.5, this.vx, this.vy);
+	// Apply friction (linear deceleration)
+	this.vx = sign(this.vx) * Math.max(0, Math.abs(this.vx) - this.friction);
+	this.vy = sign(this.vy) * Math.max(0, Math.abs(this.vy) - this.friction);
+	// Limit speed
+	var speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+	if (speed > this.maxSpeed) {
+		this.vx *= this.maxSpeed / speed;
+		this.vy *= this.maxSpeed / speed;
+	}
+	// Accelerate
+	this.vx += Math.max(-1,Math.min(this.wx,1)) * this.acceleration;
+	this.vy += Math.max(-1,Math.min(this.wy,1)) * this.acceleration;
+
+	// Do physics
+	var m = World.move(this.x, this.y,0.4, this.vx, this.vy);
 	this.x = m[0];
 	this.y = m[1];
 	this.vx *= m[2];

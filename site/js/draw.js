@@ -7,7 +7,7 @@
 var Camera = {
 	x:	0,	// tiles
 	y:	0,	// tiles
-	tilesHorizontal:	25
+	tilesHorizontal:	20
 }
 
 Camera.contains = function(x, y){

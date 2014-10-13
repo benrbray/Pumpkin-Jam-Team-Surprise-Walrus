@@ -20,10 +20,8 @@ function gameInit(){
 	GridObject.gridObjects.push(g);
 	
 	// Define Player
-	player = new GameObject(4, 0.5, new GameAsset(1,1,[],null));
+	player = new GameObject(4, 0.5, new GameAsset(0.8,0.8,[],null));
 	GameObject.gameObjects.push(player);
-	player.speed = 0.1;
-	player.maxSpeed = 1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -45,18 +43,33 @@ function gameUpdate(){
 	// if (Keyboard.RIGHT) { player.vx += player.speed; }
 	// if (Keyboard.UP)	   { player.vy -= player.speed; }
 	// if (Keyboard.DOWN)  { player.vy += player.speed; }
-
-	// Linear Acceleration Test ~Tyler
-	if (Keyboard.LEFT)  {player.vx = Math.max(player.vx - 2*player.speed, -1*player.maxSpeed)}
-	if (Keyboard.RIGHT) {player.vx = Math.min(player.vx + 2*player.speed, player.maxSpeed)}
-
-	if (Keyboard.UP)    {player.vy = Math.max(player.vy - 2*player.speed, -1*player.maxSpeed)}
-	if (Keyboard.DOWN)  {player.vy = Math.min(player.vy + 2*player.speed, player.maxSpeed)}
-
-
-	player.vx = sign(player.vx)==1?Math.max(player.vx - player.speed,0):Math.min(player.vx + player.speed,0);
-	player.vy = sign(player.vy)==1?Math.max(player.vy - player.speed,0):Math.min(player.vy + player.speed,0);
-
+	/*
+	if (Keyboard.LEFT)  {
+		player.vx -= player.acceleration;
+	}
+	if (Keyboard.RIGHT) {
+		player.vx += player.acceleration;
+	}
+	if (Keyboard.UP)    {
+		player.vy -= player.acceleration;
+	}
+	if (Keyboard.DOWN)  {
+		player.vy += player.acceleration;
+	} */
+	player.wx = 0;
+	player.wy = 0;
+	if (Keyboard.LEFT)  {
+		player.wx = -1;
+	}
+	if (Keyboard.RIGHT) {
+		player.wx = 1;
+	}
+	if (Keyboard.UP)    {
+		player.wy = -1;
+	}
+	if (Keyboard.DOWN)  {
+		player.wy = 1;
+	}
 	// Move Camera
 	Camera.x = Camera.x * 0.7 + player.x * 0.3;
 	Camera.y = Camera.y * 0.7 + player.y * 0.3;
