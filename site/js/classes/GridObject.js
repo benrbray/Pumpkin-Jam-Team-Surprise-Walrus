@@ -6,6 +6,19 @@ function GridObject(xTile, yTile, gameAsset){
 	this.xTile = xTile;
 	this.yTile = yTile;
 	this.gameAsset = gameAsset;
+	var halfWidth = gameAsset.width / 2 << 0;
+	var halfHeight = gameAsset.height / 2 << 0;
+	for (var x = 0; x < gameAsset.width; x++) {
+		for (var y = 0; y < gameAsset.height; y++) {
+			if (gameAsset.walkGrid[x][y]) {
+				World.grid[
+					this.xTile + x - HalfWidth
+				][
+					this.yTile + y - halfHeight
+				] = true;
+			}
+		}
+	}
  }
  
  GridObject.prototype.draw = function(){
