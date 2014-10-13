@@ -106,3 +106,16 @@ World.move = function(x,y , r, vx,vy) {
 		return [x + mx,y + my,0.8,0.8];
 	}
 }
+
+// Predicate determining whether there is line of sight between the two points
+World.visible = function(xfrom,yfrom, xto,yto) {
+	var div = 20; // Divisions of segment (higher means slower, more accurate)
+	var xd = (xto - xfrom) / div;
+	var yd = (yto - yfrom) / div;
+	for (var j = 0; j < 20; j++) {
+		if (World.isSolid(xfrom + xd * j,yfrom + yd * j)) {
+			return false;
+		}
+	}
+	return true;
+}
