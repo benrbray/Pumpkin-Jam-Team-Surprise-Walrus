@@ -3,7 +3,13 @@
 
 function nearestWolf(x,y) {
 	// TODO: Impliment for satellite wolves too
-	return {x:player.x,y:player.y};
+	var m = [];
+	for (var i = 0; i < GameObject.gameObjects.length; i++) {
+		if (GameObject.gameObjects[i].wolf) {
+			m.push(GameObject.gameObjects[i]);
+		}
+	}
+	return {x:m[0].x,y:m[0].y};
 }
 
 function humanThink(h) {
