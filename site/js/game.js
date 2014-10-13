@@ -10,11 +10,11 @@ var player = null;
 
 function gameInit(){
 	// Test Objects
-	var g = new GridObject(10,10, GameAsset.tree);
+	new GridObject(10,10, GameAsset.tree);
 
-	var g = new GridObject(10,11, GameAsset.tree);
+	new GridObject(10,11, GameAsset.tree);
 	
-	var g = new GridObject(12,13, GameAsset.tree);
+	new GridObject(12,13, GameAsset.tree);
 	
 	// Define Player
 	player = new GameObject(playerThink, 4, 1, GameAsset.player);
