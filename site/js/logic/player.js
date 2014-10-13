@@ -42,7 +42,7 @@ function playerThink(player) {
 	var drawmag = magnitude(player.drawx,player.drawy);
 	if (Keyboard.SPACE && player.leapwait === 0 && drawmag > 0) {
 		// Start leaping
-		player.leapwait = 60;
+		player.leapwait = 55;
 		player.leapx = player.drawx / drawmag;
 		player.leapy = player.drawy / drawmag;
 	}
