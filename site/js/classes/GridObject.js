@@ -3,8 +3,6 @@
  */
  
 function GridObject(xTile, yTile, gameAsset){
-	var gridObjects
-	
 	this.xTile = xTile;
 	this.yTile = yTile;
 	this.gameAsset = gameAsset;

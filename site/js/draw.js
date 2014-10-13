@@ -7,8 +7,6 @@
 var Camera = {
 	x:	0,	// tiles
 	y:	0,	// tiles
-	vx:	0,	// tiles/frame
-	vy: 0,	// tiles/frame
 	tilesHorizontal:	25
 }
 
