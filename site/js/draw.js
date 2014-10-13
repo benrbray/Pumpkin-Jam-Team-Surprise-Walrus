@@ -36,22 +36,3 @@ function draw() {
 	// Reset Canvas Coordinates for drawing GUI
 	context.setTransform(1,0,0,1,0,0);
 }
-
-function htmlColor(r, g, b, a) {
-	/*
-	 * Why not use
-	r &= 0xff;
-	g &= 0xff;
-	b &= 0xff;
-	 * to ensure that rgba is between 0 and 255?
-	 * ~Tyler
-	 */
-
-	r = r*1 << 0;
-	g = g*1 << 0;
-	b = b*1 << 0;
-	if (typeof a != typeof 1) {
-		a = 1;
-	}
-	return "rgba(" + r +  "," + g + "," + b + "," + a +")";
-}

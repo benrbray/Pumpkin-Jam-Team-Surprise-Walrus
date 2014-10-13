@@ -54,10 +54,12 @@ GameObject.prototype.update = function(){
 
 GameObject.gameObjects = [];
 
+// Adds a GameObject to the drawing stage
 GameObject.add = function(gameObject){
 	GameObject.gameObjects.push(gameObject);
 }
 
+// Calls the update() and draw() for each GameObject
 GameObject.drawAll = function(){
 	var gameObjects = GameObject.gameObjects;
 	for(var i = 0; i < gameObjects.length; i++){
