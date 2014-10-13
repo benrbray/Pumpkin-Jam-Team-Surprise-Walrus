@@ -6,7 +6,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function GameObject(x, y, gameAsset){
+function GameObject(brain, x, y, gameAsset){
 	this.x = x;		// x position (tiles)
 	this.y = y;		// y position (tiles)
 	this.vx = 0;	// x velocity (tiles/frame)
@@ -17,6 +17,7 @@ function GameObject(x, y, gameAsset){
 	this.maxSpeed = .11;
 	this.friction = 0.02;
 	this.gameAsset = gameAsset;
+	this.brain = brain;
 }
 
 GameObject.prototype.draw = function(){
@@ -33,6 +34,8 @@ GameObject.prototype.update = function(){
 		this.vx *= this.maxSpeed / speed;
 		this.vy *= this.maxSpeed / speed;
 	}
+	// Think According to Type
+	this.brain(this);
 	// Accelerate
 	this.vx += Math.max(-1,Math.min(this.wx,1)) * this.acceleration;
 	this.vy += Math.max(-1,Math.min(this.wy,1)) * this.acceleration;

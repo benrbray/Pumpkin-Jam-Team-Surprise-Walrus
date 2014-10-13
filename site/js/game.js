@@ -20,42 +20,14 @@ function gameInit(){
 	GridObject.gridObjects.push(g);
 	
 	// Define Player
-	player = new GameObject(4, 0.5, new GameAsset(0.8,0.8,[],null));
+	player = new GameObject(PlayerThink, 4, 0.5, new GameAsset(0.8,0.8,[],null));
 	GameObject.gameObjects.push(player);
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 
-function gameUpdate(){
-	draw();
-	requestAnimationFrame(gameUpdate);
-
-	// Slows down a player after they've stopped moving
-	// Also keeps a lid on the math below
-	// Speed up/slow down should be branched off, imo.
-	// player.vx *= 0.9;
-	// player.vy *= 0.9;
-
-	// Move Player
-	// The math here allows a player to move diagonally at sqrt(2)*speed
-	// Not sure if that is a problem or not
-	// if (Keyboard.LEFT)  { player.vx -= player.speed; }
-	// if (Keyboard.RIGHT) { player.vx += player.speed; }
-	// if (Keyboard.UP)	   { player.vy -= player.speed; }
-	// if (Keyboard.DOWN)  { player.vy += player.speed; }
-	/*
-	if (Keyboard.LEFT)  {
-		player.vx -= player.acceleration;
-	}
-	if (Keyboard.RIGHT) {
-		player.vx += player.acceleration;
-	}
-	if (Keyboard.UP)    {
-		player.vy -= player.acceleration;
-	}
-	if (Keyboard.DOWN)  {
-		player.vy += player.acceleration;
-	} */
+function PlayerThink(player) {
 	player.wx = 0;
 	player.wy = 0;
 	if (Keyboard.LEFT)  {
@@ -70,6 +42,19 @@ function gameUpdate(){
 	if (Keyboard.DOWN)  {
 		player.wy = 1;
 	}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+function gameUpdate(){
+	draw();
+	requestAnimationFrame(gameUpdate);
+	// Move Player
+	// if (Keyboard.LEFT)  { player.vx -= player.speed; }
+	// if (Keyboard.RIGHT) { player.vx += player.speed; }
+	// if (Keyboard.UP)	   { player.vy -= player.speed; }
+	// if (Keyboard.DOWN)  { player.vy += player.speed; }
+
 	// Move Camera
 	Camera.x = Camera.x * 0.7 + player.x * 0.3;
 	Camera.y = Camera.y * 0.7 + player.y * 0.3;
