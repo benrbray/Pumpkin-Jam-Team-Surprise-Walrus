@@ -4,7 +4,7 @@
  * @param (width, height) Dimensions of asset bounding box on the grid.
  * @param (walkGrid) Two-dimensional array of walkability values over the grid
  *		of this asset. Optionally, give a single true/false value to set the
- *		walkability for the entire asset.
+ *		walkability for the entire asset.  "true" means a tile is walkable.
  * @param (drawFunction) Function that handles drawing of this object; will be
 		passed 'this' as a parameter.  Optionally, provide an image file path to
 		use the default sprite drawing function.
@@ -14,7 +14,13 @@ function GameAsset(width, height, walkGrid, drawFunction){
 	
 	this.width = width;			// width of asset, in tiles
 	this.height = height;		// height of asset, in tiles
-	this.walkGrid = walkGrid;	// 2d array of walkability 'grid' of this asset
+	
+	// If walkGrid is boolean, build a 2d array; otherwise use provided grid
+	if(walkGrid instanceof Array){
+		this.walkGrid = walkGrid;
+	} else {
+		this.walkGrid = gridOfSize(this.width, this.height, walkGrid);
+	}
 	
 	// Draw --------------------------------------------------------------------
 	
@@ -49,8 +55,9 @@ function GameAsset(width, height, walkGrid, drawFunction){
 
 //// PREDEFINED ASSETS /////////////////////////////////////////////////////////
 
-GameAsset.tree = new GameAsset(1,1,[[true]], "wal.png");
-GameAsset.player = new GameAsset(0.8, 0.8, [[false]], null);
+GameAsset.tree = new GameAsset(1,1, false, "wal.png");
+GameAsset.player = new GameAsset(0.8, 0.8, true, null);
+GameAsset.cabin = new GameAsset(4, 3, false, "wal.png");
 
 //// STATIC FUNCTIONS //////////////////////////////////////////////////////////
 
@@ -61,6 +68,14 @@ GameAsset.drawBox = function(x, y, obj){
 
 GameAsset.drawSprite = function(x, y, obj){
 	if (obj.imgready) {
-		context.drawImage(obj.img, x,y, obj.width, obj.height);
+		var halfWidth = 0;
+		var halfHeight = 0;
+		context.drawImage(
+			obj.img, 
+			x - halfWidth,
+			y - halfHeight,
+			obj.width,
+			obj.height
+		);
 	}
 }

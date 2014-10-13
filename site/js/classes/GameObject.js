@@ -76,3 +76,8 @@ GameObject.drawAll = function(){
 		obj.draw();
 	}
 }
+
+// Deletes all game objects
+GameObject.clearAll = function(){
+	GameObject.gameObjects = [];
+}

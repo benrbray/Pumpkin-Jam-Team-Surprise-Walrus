@@ -3,22 +3,28 @@
  */
  
 function GridObject(xTile, yTile, gameAsset){
+	// Instance Variables ------------------------------------------------------
 	this.xTile = xTile;
-	this.yTile = yTile;
+	this.yTile = yTile;	
 	this.gameAsset = gameAsset;
-	var halfWidth = gameAsset.width / 2 << 0;
-	var halfHeight = gameAsset.height / 2 << 0;
-	for (var x = 0; x < gameAsset.width; x++) {
-		for (var y = 0; y < gameAsset.height; y++) {
-			if (!gameAsset.walkGrid[x][y]) {
-				World.grid[
-					this.xTile + x - halfWidth
-				][
-					this.yTile + y - halfHeight
-				] = true;
+	
+	var halfWidth = 0;
+	var halfHeight = 0;
+	
+	// Management --------------------------------------------------------------
+	
+	// Write to Global Grid
+	for (var localX = 0; localX < gameAsset.width; localX++) {
+		for (var localY = 0; localY < gameAsset.height; localY++) {
+			if (!gameAsset.walkGrid[localX][localY]) {
+				var globalX = this.xTile + localX - halfWidth;
+				var globalY = this.yTile + localY - halfHeight;
+				World.grid[globalX][globalY] = true;
 			}
 		}
 	}
+	
+	// Stage this object for drawing
 	GridObject.gridObjects.push(this);
  }
  
@@ -36,7 +42,6 @@ function GridObject(xTile, yTile, gameAsset){
 }*/
 
 //// STATIC FUNCTIONS //////////////////////////////////////////////////////////
-
 
 GridObject.gridObjects = [];
 

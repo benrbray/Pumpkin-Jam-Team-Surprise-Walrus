@@ -1,3 +1,5 @@
+"use strict";
+
 function sign(x) {
 	return x?x<0?-1:1:0;
 }
@@ -14,4 +16,17 @@ function htmlColor(r, g, b, a) {
 		+ (b&0xff) + "," 
 		+ a +")"
 	);
+}
+
+// uniform 2d array populated with value
+function gridOfSize(w, h, val){
+	var grid = [];
+	for(var x = 0; x < w; x++){
+		var col = [];
+		for(var y = 0; y < h; y++){
+			col.push(val);
+		}
+		grid.push(col);
+	}
+	return grid;
 }
