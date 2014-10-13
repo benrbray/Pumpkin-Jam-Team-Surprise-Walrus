@@ -39,11 +39,11 @@ function playerThink(player) {
 	var vm = Math.sqrt(player.vx * player.vx + player.vy * player.vy);
 	// Speed
 
-	if (Keyboard.SPACE && player.leapwait === 0 && vm > 0.05) {
+	if (Keyboard.SPACE && player.leapwait === 0) {
 		// Start leaping
 		player.leapwait = 60;
-		player.leapx = player.vx / vm;
-		player.leapy = player.vy / vm;
+		player.leapx = player.drawx * 9;
+		player.leapy = player.drawy * 9;
 	}
 	if (player.attacks > 0) {
 		player.leapwait = 15;
