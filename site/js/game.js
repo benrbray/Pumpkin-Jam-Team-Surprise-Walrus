@@ -27,6 +27,10 @@ function gameInit(){
 ////////////////////////////////////////////////////////////////////////////////
 
 function gameUpdate(){
+	// Update Everything
+	GameObject.updateAll();
+	
+	// Draw Everything
 	draw();
 	requestAnimationFrame(gameUpdate);
 

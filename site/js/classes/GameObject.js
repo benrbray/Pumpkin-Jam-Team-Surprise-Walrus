@@ -59,12 +59,20 @@ GameObject.add = function(gameObject){
 	GameObject.gameObjects.push(gameObject);
 }
 
+// Updates all staged GameObjects
+GameObject.updateAll = function(){
+	var gameObjects = GameObject.gameObjects;
+	for(var i = 0; i < gameObjects.length; i++){
+		var obj = gameObjects[i];
+		obj.update();
+	}
+}
+
 // Calls the update() and draw() for each GameObject
 GameObject.drawAll = function(){
 	var gameObjects = GameObject.gameObjects;
 	for(var i = 0; i < gameObjects.length; i++){
 		var obj = gameObjects[i];
-		obj.update();
 		obj.draw();
 	}
 }
