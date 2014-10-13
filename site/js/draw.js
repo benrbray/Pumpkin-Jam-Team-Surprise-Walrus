@@ -19,8 +19,7 @@ function draw() {
 	// Draw World
 	GridObject.drawAll();
 	GameObject.drawAll();
-
-
+	
 	Particle.drawParticles();
 	
 	// Reset Canvas Coordinates for drawing GUI

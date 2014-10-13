@@ -55,9 +55,16 @@ function GameAsset(width, height, walkGrid, drawFunction){
 
 //// PREDEFINED ASSETS /////////////////////////////////////////////////////////
 
-GameAsset.tree = new GameAsset(1,1, false, "wal.png");
+// Natural Elements
+GameAsset.treeTrunk = new GameAsset(1,1, false, "wal.png");
+
+// Player
 GameAsset.player = new GameAsset(0.8, 0.8, true, null);
-GameAsset.cabin = new GameAsset(4, 3, false, "wal.png");
+
+// Humans
+
+// Settlements
+GameAsset.cabin = new GameAsset(4, 3, false);
 
 //// STATIC FUNCTIONS //////////////////////////////////////////////////////////
 

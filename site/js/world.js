@@ -25,7 +25,7 @@ World.clear = function(size) {
 }
 World.clear(128);
 
-////////////////////////////////////////////////////////////////////////////////
+//// GEOMETRY //////////////////////////////////////////////////////////////////
 
 /* WORLD.ISSOLID
  * Determine if a grid point is solid or not.
@@ -37,6 +37,11 @@ World.isSolid = function(x,y) {
 	// Otherwise read from grid
 	return World.grid[x << 0][y << 0];
 }
+
+/* WORLD.ISWALKABLE
+ * Determine if a grid point is walkable or not.
+ */
+World.isWalkable = function(x,y) { !World.isSolid(x,y); }
 
 /* WORLD.HASSPACE
  * Does an object of "radius" r (dimensions 2r x 2r) 
@@ -51,6 +56,23 @@ World.hasSpace = function(x,y,r) {
 	}
 	return !cannotMove;
 }
+
+/* WORLD.VISIBLE
+ * Predicate determining whether there is line of sight between the two points.
+ */
+World.visible = function(xfrom,yfrom, xto,yto) {
+	var div = 20; // Divisions of segment (higher means slower, more accurate)
+	var xd = (xto - xfrom) / div;
+	var yd = (yto - yfrom) / div;
+	for (var j = 0; j < 20; j++) {
+		if (World.isSolid(xfrom + xd * j,yfrom + yd * j)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+// Collisions ------------------------------------------------------------------
 
 /* WORLD.MOVE
  * Computes movement from position (x,y) with velocity (in this frame) (vx,vy) 
@@ -107,15 +129,8 @@ World.move = function(x,y , r, vx,vy) {
 	}
 }
 
-// Predicate determining whether there is line of sight between the two points
-World.visible = function(xfrom,yfrom, xto,yto) {
-	var div = 20; // Divisions of segment (higher means slower, more accurate)
-	var xd = (xto - xfrom) / div;
-	var yd = (yto - yfrom) / div;
-	for (var j = 0; j < 20; j++) {
-		if (World.isSolid(xfrom + xd * j,yfrom + yd * j)) {
-			return false;
-		}
-	}
-	return true;
+//// ENVIRONMENT ///////////////////////////////////////////////////////////////
+
+World.addTree = function(x, y){
+	var trunk = new GridObject(x, y, GameAsset.treeTrunk);
 }
