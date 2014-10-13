@@ -25,6 +25,8 @@ function humanThink(h) {
 		h.maxSpeed = .02;
 		h.friction = 0.01;
 		h.human = true;
+		h.armed = Math.random() < 0.4;
+		h.firing = 0;
 	}
 	// Human Properties
 	/*
@@ -79,6 +81,36 @@ function humanThink(h) {
 				h.wx = -(h.x - nearestThreat.x);
 				h.wy = -(h.y - nearestThreat.y);
 			}
+		}
+
+		var threatDistance = distance(h.x,h.y, nearestThreat.x,nearestThreat.y);
+		if ( threatDistance < 5 ) {
+			// Apprehensive
+			h.fear += 1/60/15; // approximately 2 min for panic
+		}
+
+		if (h.armed) {
+			if (World.visible(h.x,h.y, nearestThreat.x,nearestThreat.y)) {
+				var range = 4.5;
+				if (World.isLit(nearestThreat.x,nearestThreat.y)) {
+					range = 1.9;
+				}
+				if (threatDistance < range) {
+					// And facing correct way
+					var fx = h.drawx;
+					var fy = h.drawy;
+					if (fx * (nearestThreat.x - h.x) + fy * (nearestThreat.y - h.y) >= 0) {
+						// Can see
+						// Prepare to fire.
+						h.firing = 15;
+					}
+				}
+			}
+		}
+		if (h.firing > 0) {
+			h.wx = 0;
+			h.wy = 0;
+			h.firing--;
 		}
 	}
 }

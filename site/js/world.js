@@ -59,6 +59,10 @@ World.hasSpace = function(x,y,r) {
 	return !cannotMove;
 }
 
+World.isLit = function(x,y) {
+	return false;
+}
+
 /* WORLD.VISIBLE
  * Predicate determining whether there is line of sight between the two points.
  */
