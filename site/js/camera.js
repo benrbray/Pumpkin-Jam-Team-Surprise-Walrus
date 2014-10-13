@@ -24,6 +24,21 @@ Camera.contains = function(x, y){
 	return Math.abs(xsep) < maxx + 2 && Math.abs(ysep) < maxy + 2;
 }
 
+/* CAMERA.TRANSFORM
+ * Transforms the given context to reflect the viewing angle specified by
+ * camera.
+ */
+Camera.transform = function(ctx) {
+	var scale = WINDOW_WIDTH / (Camera.tilesHorizontal);
+	ctx.scale(scale, scale);
+	// Center camera on screen
+	ctx.translate(
+		-(Camera.x - Camera.tilesHorizontal / 2),
+		-(Camera.y - Camera.tilesHorizontal * WINDOW_HEIGHT / WINDOW_WIDTH / 2)
+	);
+}
+
+
 /* CAMERA.FROMSCREEN
  * Converts position (sx,sy) on the HTML canvas to world (tile) coordinates
  * Returns coordinates as array [x,y].
