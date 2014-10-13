@@ -23,6 +23,7 @@ function GameObject(x, y, gameAsset, brain){
 GameObject.prototype.draw = function(){
 	// Draw Asset
 	this.gameAsset.draw(this.x, this.y, this);
+}
 
 GameObject.prototype.update = function(){
 	// Limit speed

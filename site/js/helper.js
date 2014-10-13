@@ -12,6 +12,10 @@ function distance(a,b,x,y) {
 	return magnitude(x-a,y-b);
 }
 
+function rnd(){
+	return Math.random()*2-1;
+}
+
 // converts RGBA to HTML color string
 function htmlColor(r, g, b, a) {
 	// ensure alpha is a number
