@@ -13,10 +13,14 @@ function GameAsset(width, height, walkGrid, path){
 	this.imagePath = path;		// image path
 	
 	// Draw --------------------------------------------------------------------
-	
+
+	var randomRed = Math.random() * 255;
+	var randomGreen = Math.random() * 255;
+	var randomBlue = Math.random() * 255;
 	this.draw = function(x,y){
 		// TODO
-		context.fillStyle = "white";
+
+		context.fillStyle = htmlColor(randomRed, randomGreen, randomBlue);
 		context.fillRect(x,y, this.width, this.height);
 	}
- }
+}
