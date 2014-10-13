@@ -11,7 +11,7 @@ Levels[0] = new Level("Test Level", function(){
 	var cabin = new GridObject(2,2, GameAsset.cabin);
 	
 	// Define Player
-	player = new GameObject(playerThink, 1,1, GameAsset.player);
+	var player = World.addPlayer(1,1);
 	GameObject.add(player);
 	
 	// Manually add trees

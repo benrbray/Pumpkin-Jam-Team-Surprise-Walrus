@@ -6,7 +6,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function GameObject(brain, x, y, gameAsset){
+function GameObject(x, y, gameAsset, brain){
 	this.x = x;		// x position (tiles)
 	this.y = y;		// y position (tiles)
 	this.vx = 0;	// x velocity (tiles/frame)
@@ -38,8 +38,9 @@ GameObject.prototype.update = function(){
 	speed = Math.max(0,Math.min(speed - this.friction, this.maxSpeed));
 	this.vx *= speed;
 	this.vy *= speed;
+	
 	// Think According to Type
-	this.brain(this);
+	if(this.brain) { this.brain(this); };
 	
 	// Accelerate
 	var wm = Math.sqrt(this.wx * this.wx + this.wy * this.wy);
@@ -70,6 +71,7 @@ GameObject.gameObjects = [];
 // Adds a GameObject to the drawing stage
 GameObject.add = function(gameObject){
 	GameObject.gameObjects.push(gameObject);
+	return gameObject;
 }
 
 // Updates all staged GameObjects

@@ -30,3 +30,15 @@ function gridOfSize(w, h, val){
 	}
 	return grid;
 }
+
+CanvasRenderingContext2D.prototype.fillCircle = function(x,y,radius){
+	this.beginPath();
+	this.arc(x,y,radius,0,2*Math.PI);
+	this.fill();
+}
+
+CanvasRenderingContext2D.prototype.strokeCircle = function(x,y,radius){
+	this.beginPath();
+	this.arc(x,y,radius,0,2*Math.PI);
+	this.stroke();
+}

@@ -34,32 +34,24 @@ function GameAsset(width, height, walkGrid, drawFunction){
 	// Use draw function if provided; otherwise treat as image and draw sprite
 	if(drawFunction instanceof Function) {
 		this.draw = function(x,y, obj){ drawFunction(x, y, this, obj); }
-	} else if (drawFunction) {
-		// drawFunction is provided but not a function
-		// -- it is a sprite
-		this.img = new Image();
+	} else if (drawFunction) { // drawFunction is provided, treat as sprite
+		// Prepare Image instance for drawing sprite
 		var t = this;
-		this.img.onload = function() {
-			t.imgready = true;
-		};
+		this.img = new Image();
+		this.img.onload = function() { t.imgready = true; };
 		this.img.src = drawFunction;
+		
+		// Draw sprite
 		this.draw = function(x,y){
 			GameAsset.drawSprite(x, y, this);
 		}
 	} else {
+		// Draw bounding box if no image / 
 		this.draw = function(x,y) { 
 			GameAsset.drawBox(x,y,this);
 		};
 	}
 }
-
-//// PREDEFINED ASSETS /////////////////////////////////////////////////////////
-
-// Natural Elements
-GameAsset.treeTrunk = new GameAsset(1,1, false, "wal.png");
-
-// Settlements
-GameAsset.cabin = new GameAsset(4, 3, false);
 
 //// STATIC FUNCTIONS //////////////////////////////////////////////////////////
 

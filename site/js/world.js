@@ -15,6 +15,8 @@ var World = {};
 World.clear = function(size) {
 	World.grid = [];
 	World.size = size;
+	World.player = null;
+	
 	// Initialize World grid to be entirely walkable
 	for (var i = 0; i < World.size; i++) {
 		World.grid[i] = [];
@@ -131,6 +133,12 @@ World.move = function(x,y , r, vx,vy) {
 
 //// ENVIRONMENT ///////////////////////////////////////////////////////////////
 
+World.addPlayer = function(x, y){
+	World.player = GameObject.add(new GameObject(x, y, GameAsset.player, playerThink));
+	return World.player;
+}
 World.addTree = function(x, y){
 	var trunk = new GridObject(x, y, GameAsset.treeTrunk);
+	var body = new GameObject(x+0.5, y+0.5, GameAsset.treeBody);
+	GameObject.add(body);
 }
