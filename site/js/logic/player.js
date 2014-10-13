@@ -52,13 +52,16 @@ function playerThink(player) {
 		player.attacktarget.vx = 0;
 		player.attacktarget.vy = 0;
 		player.attacktarget.friction = 1;
-		if (Keyboard.SPACE) {
+		if (!Keyboard.SPACE) {
+			player.unspaced = true;
+		}
+		if (Keyboard.SPACE && player.unspaced) {
+			player.unspaced = false;
 			player.attacks--;
 			for (var count = 0; count < 10; count++) {
 				new Particle(player.x,player.y, 0.1 + Math.random() * 0.2, Math.random() * 150 + 50,0,0, 30);
 				// Blood effect
 			}
-			Keyboard.SPACE = false;
 			if (player.attacks == 0) {
 				player.attacktarget.die();
 			}
