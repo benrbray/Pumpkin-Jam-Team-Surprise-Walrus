@@ -37,7 +37,4 @@ function documentMouseMove(e) {
 	// offsetX, offsetY
 	Mouse.x = e.offsetX;
 	Mouse.y = e.offsetY;
-	var world = Camera.fromScreen(Mouse.x,Mouse.y);
-	Mouse.worldx = world[0];
-	Mouse.worldy = world[1];
 }
