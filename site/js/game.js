@@ -22,16 +22,16 @@ function gameInit(){
 function gameUpdate(){
 	draw();
 	requestAnimationFrame(gameUpdate);
-	if (Keyboard.A) {
+	if (Keyboard.LEFT) {
 		Camera.x -= 1;
 	}
-	if (Keyboard.D) {
+	if (Keyboard.RIGHT) {
 		Camera.x += 1;
 	}
-	if (Keyboard.W) {
+	if (Keyboard.UP) {
 		Camera.y -= 1;
 	}
-	if (Keyboard.S) {
+	if (Keyboard.DOWN) {
 		Camera.y += 1;
 	}
 }
