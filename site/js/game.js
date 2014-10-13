@@ -23,6 +23,7 @@ function gameInit(){
 	player = new GameObject(4, 0.5, new GameAsset(1,1,[],null));
 	GameObject.gameObjects.push(player);
 	player.speed = 0.1;
+	player.maxSpeed = 1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -30,17 +31,33 @@ function gameInit(){
 function gameUpdate(){
 	draw();
 	requestAnimationFrame(gameUpdate);
-	
-	player.vx *= 0.9;
-	player.vy *= 0.9;
+
+	// Slows down a player after they've stopped moving
+	// Also keeps a lid on the math below
+	// Speed up/slow down should be branched off, imo.
+	// player.vx *= 0.9;
+	// player.vy *= 0.9;
 
 	// Move Player
-	if (Keyboard.LEFT)	{ player.vx -= player.speed; }
-	if (Keyboard.RIGHT)	{ player.vx += player.speed; }
-	if (Keyboard.UP)	{ player.vy -= player.speed; }
-	if (Keyboard.DOWN)	{ player.vy += player.speed; }
-	
+	// The math here allows a player to move diagonally at sqrt(2)*speed
+	// Not sure if that is a problem or not
+	// if (Keyboard.LEFT)  { player.vx -= player.speed; }
+	// if (Keyboard.RIGHT) { player.vx += player.speed; }
+	// if (Keyboard.UP)	   { player.vy -= player.speed; }
+	// if (Keyboard.DOWN)  { player.vy += player.speed; }
+
+	// Linear Acceleration Test ~Tyler
+	if (Keyboard.LEFT)  {player.vx = Math.max(player.vx - 2*player.speed, -1*player.maxSpeed)}
+	if (Keyboard.RIGHT) {player.vx = Math.min(player.vx + 2*player.speed, player.maxSpeed)}
+
+	if (Keyboard.UP)    {player.vy = Math.max(player.vy - 2*player.speed, -1*player.maxSpeed)}
+	if (Keyboard.DOWN)  {player.vy = Math.min(player.vy + 2*player.speed, player.maxSpeed)}
+
+
+	player.vx = sign(player.vx)==1?Math.max(player.vx - player.speed,0):Math.min(player.vx + player.speed,0);
+	player.vy = sign(player.vy)==1?Math.max(player.vy - player.speed,0):Math.min(player.vy + player.speed,0);
+
 	// Move Camera
-	Camera.x = Camera.x * 0.9 + player.x * 0.1;
-	Camera.y = Camera.y * 0.9 + player.y * 0.1;
+	Camera.x = Camera.x * 0.7 + player.x * 0.3;
+	Camera.y = Camera.y * 0.7 + player.y * 0.3;
 }

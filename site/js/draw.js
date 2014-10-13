@@ -38,6 +38,15 @@ function draw() {
 }
 
 function htmlColor(r, g, b, a) {
+	/*
+	 * Why not use
+	r &= 0xff;
+	g &= 0xff;
+	b &= 0xff;
+	 * to ensure that rgba is between 0 and 255?
+	 * ~Tyler
+	 */
+
 	r = r*1 << 0;
 	g = g*1 << 0;
 	b = b*1 << 0;
