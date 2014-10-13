@@ -1,0 +1,15 @@
+#htmlscreen {
+	position:fixed;
+	left:50%;
+	top:50%;
+}
+
+#htmlcanvas {
+	position:absolute;
+	left:-400px;
+	top:-300px;
+}
+
+body {
+	background:#302;
+}
