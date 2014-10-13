@@ -56,7 +56,7 @@ function humanThink(h) {
 		var ty = h.homey + Math.sin(h.randomDirection) * 3;
 		h.wx = tx - h.x;
 		h.wy = ty - h.y;
-		if ( (h.x-tx)*(h.x-tx) + (h.y-ty)*(h.y-ty) < 0.1 * 0.1 ) {
+		if ( distance(h.x,h.y,tx,ty) < 0.1 ) {
 			// Within 0.1 tiles of target so stop.
 			h.wx = 0;
 			h.wy = 0;

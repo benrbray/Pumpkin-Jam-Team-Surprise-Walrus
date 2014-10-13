@@ -36,14 +36,15 @@ function playerThink(player) {
 		player.wy = dy;
 	}
 
-	var vm = Math.sqrt(player.vx * player.vx + player.vy * player.vy);
+	var vm = magnitude(player.vx, player.vy);
 	// Speed
 
-	if (Keyboard.SPACE && player.leapwait === 0) {
+	var drawmag = magnitude(player.drawx,player.drawy);
+	if (Keyboard.SPACE && player.leapwait === 0 && drawmag > 0) {
 		// Start leaping
 		player.leapwait = 60;
-		player.leapx = player.drawx * 9;
-		player.leapy = player.drawy * 9;
+		player.leapx = player.drawx / drawmag;
+		player.leapy = player.drawy / drawmag;
 	}
 	if (player.attacks > 0) {
 		player.leapwait = 15;
@@ -76,9 +77,7 @@ function playerThink(player) {
 		for (var i = 0; i < GameObject.gameObjects.length; i++) {
 			var obj = GameObject.gameObjects[i];
 			if (obj.human) {
-				var dx = obj.x - player.x;
-				var dy = obj.y - player.y;
-				if (dx*dx + dy*dy < 1 * 1) {
+				if (distance(obj.x,obj.y,player.x,player.y) < 1) {
 					// Close enough to smack each other
 					player.attacks = 6;
 					player.attacktarget = obj;
