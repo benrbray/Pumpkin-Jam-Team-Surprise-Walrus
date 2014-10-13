@@ -16,10 +16,12 @@ function draw() {
 		-(Camera.x - Camera.tilesHorizontal / 2),
 		-(Camera.y - Camera.tilesHorizontal * WINDOW_HEIGHT / WINDOW_WIDTH / 2)
 	);
-	
 	// Draw World
 	GridObject.drawAll();
 	GameObject.drawAll();
+
+
+	Particle.drawParticles();
 	
 	// Reset Canvas Coordinates for drawing GUI
 	context.setTransform(1,0,0,1,0,0);
