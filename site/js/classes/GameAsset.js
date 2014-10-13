@@ -61,7 +61,6 @@ GameAsset.drawBox = function(x, y, obj){
 
 GameAsset.drawSprite = function(x, y, obj){
 	if (obj.imgready) {
-		console.log(x,y);
 		context.drawImage(obj.img, x,y, obj.width, obj.height);
 	}
 }
