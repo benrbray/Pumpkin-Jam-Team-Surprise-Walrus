@@ -22,3 +22,10 @@ Camera.contains = function(x, y){
 	var maxy = maxx * WINDOW_HEIGHT / WINDOW_WIDTH;
 	return Math.abs(xsep) < maxx + 2 && Math.abs(ysep) < maxy + 2;
 }
+
+Camera.fromScreen = function(sx,sy) {
+	var tilesVertical = Camera.tilesHorizontal * SCREEN_HEIGHT / SCREEN_WIDTH;
+	var worldX = sx * Camera.tilesHorizontal / SCREEN_WIDTH + Camera.x;
+	var worldY = sy * tilesVertical / SCREEN_HEIGHT + Camera.y;
+	return [worldX,worldY];
+}
