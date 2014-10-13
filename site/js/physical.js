@@ -48,7 +48,7 @@ World.move = function(x,y , r, vx,vy) {
 		var dvy = sign(vy); // Vertical directino
 		var mx = 0; // Horizontal movement amount
 		var my = 0; // Vertical momvement amount
-		var step = 0.001;
+		var step = 0.01;
 		if (mvx > mvy) {
 			// Compute x movement first
 			for (var i = mvx; i >= 0; i -= step) {
@@ -78,6 +78,6 @@ World.move = function(x,y , r, vx,vy) {
 				}
 			}
 		}
-		return [x + mx,y + my,0.9,0.9];
+		return [x + mx,y + my,0.8,0.8];
 	}
 }
