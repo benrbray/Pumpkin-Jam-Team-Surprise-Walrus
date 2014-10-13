@@ -1,4 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
+"use strict";
 
 function nearestWolf(x,y) {
 	// TODO: Impliment for satellite wolves too
@@ -6,6 +7,18 @@ function nearestWolf(x,y) {
 }
 
 function humanThink(h) {
+	if (h.fear === undefined) {
+		h.fear = 0;
+		h.bold = (Math.random() * 3 << 0) - 1;
+		h.running = 0;
+		h.randomDirection = Math.PI * 2 * Math.random();
+		h.wx = 0;
+		h.wy = 0;
+		h.homex = h.x;
+		h.homey = h.y;
+		h.maxSpeed = .02;
+		h.friction = 0.01;
+	}
 	// Human Properties
 	/*
 		fear : Number slowly decreases. Increases with proximity.
@@ -17,13 +30,14 @@ function humanThink(h) {
 		(homex,homey) : Spawn location
 	*/
 	if (Math.random() * 80 < 1) {
-		h.randomDirection = Math.PI * 2;
+		h.randomDirection = Math.PI * 2 * Math.random();
 	}
 	if (h.running > 0) {
 		// Panic!
 		h.wx = Math.cos(h.randomDirection);
 		h.wy = Math.sin(h.randomDirection);
 		h.running--;
+		h.fear *= 0.99;
 	} else {
 		// Not panicking.
 		if (h.fear > h.bold * 10 + 15) {
@@ -34,9 +48,11 @@ function humanThink(h) {
 		h.wx = h.homex + Math.cos(h.randomDirection) * 3 - h.x;
 		h.wy = h.homey + Math.sin(h.randomDirection) * 3 - h.y;
 
-		if (h.fear > (h.bold * 10 + 15) / 2 ) {
+		var nearestThreat = nearestWolf(h.x,h.y);
+
+		if (h.fear > (h.bold * 10 + 15) / 2 &&
+				World.visible(h.x,h.y, nearestThreat.x,nearestThreat.y)) {
 			// Behave according to bold
-			var nearestThreat = nearestWolf(h.x,h.y);
 			if (h.bold < 0) {
 				h.wx = h.x - nearestThreat.x;
 				h.wy = h.y - nearestThreat.y;
