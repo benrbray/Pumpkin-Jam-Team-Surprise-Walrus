@@ -29,8 +29,16 @@ function GameAsset(width, height, walkGrid, drawFunction){
 	if(drawFunction instanceof Function) {
 		this.draw = function(x,y){ drawFunction(x, y, this); }
 	} else if (drawFunction) {
+		// drawFunction is provided but not a function
+		// -- it is a sprite
+		this.img = new Image();
+		var t = this;
+		this.img.onload = function() {
+			t.imgready = true;
+		};
+		this.img.src = drawFunction;
 		this.draw = function(x,y){
-			GameAsset.drawSprite(x, y, drawFunction, this);
+			GameAsset.drawSprite(x, y, this);
 		}
 	} else {
 		this.draw = function(x,y) { 
@@ -41,7 +49,7 @@ function GameAsset(width, height, walkGrid, drawFunction){
 
 //// PREDEFINED ASSETS /////////////////////////////////////////////////////////
 
-GameAsset.tree = new GameAsset(1,1,[[true]], null);
+GameAsset.tree = new GameAsset(1,1,[[true]], "wal.png");
 GameAsset.player = new GameAsset(0.8, 0.8, [[false]], null);
 
 //// STATIC FUNCTIONS //////////////////////////////////////////////////////////
@@ -51,6 +59,9 @@ GameAsset.drawBox = function(x, y, obj){
 	context.fillRect(x,y, obj.width, obj.height);
 }
 
-GameAsset.drawSprite = function(x, y, path, obj){
-	// TODO
+GameAsset.drawSprite = function(x, y, obj){
+	if (obj.imgready) {
+		console.log(x,y);
+		context.drawImage(obj.img, x,y, obj.width, obj.height);
+	}
 }
