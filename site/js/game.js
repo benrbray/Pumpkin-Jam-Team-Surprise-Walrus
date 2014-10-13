@@ -20,14 +20,14 @@ function gameInit(){
 	GridObject.gridObjects.push(g);
 	
 	// Define Player
-	player = new GameObject(PlayerThink, 4, 0.5, new GameAsset(0.8,0.8,[],null));
+	player = new GameObject(playerThink, 4, 0.5, new GameAsset(0.8,0.8,[],null));
 	GameObject.gameObjects.push(player);
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function PlayerThink(player) {
+function playerThink(player) {
 	player.wx = 0;
 	player.wy = 0;
 	if (Keyboard.LEFT)  {
