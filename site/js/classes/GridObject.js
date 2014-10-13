@@ -8,17 +8,14 @@ function GridObject(xTile, yTile, gameAsset){
 	this.yTile = yTile;	
 	this.gameAsset = gameAsset;
 	
-	var halfWidth = 0;
-	var halfHeight = 0;
-	
 	// Management --------------------------------------------------------------
 	
 	// Write to Global Grid
 	for (var localX = 0; localX < gameAsset.width; localX++) {
 		for (var localY = 0; localY < gameAsset.height; localY++) {
 			if (!gameAsset.walkGrid[localX][localY]) {
-				var globalX = this.xTile + localX - halfWidth;
-				var globalY = this.yTile + localY - halfHeight;
+				var globalX = this.xTile + localX;
+				var globalY = this.yTile + localY;
 				World.grid[globalX][globalY] = true;
 			}
 		}

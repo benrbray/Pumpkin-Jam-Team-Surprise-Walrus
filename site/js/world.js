@@ -18,9 +18,9 @@ World.clear = function(size) {
 	World.player = null;
 	
 	// Initialize World grid to be entirely walkable
-	for (var i = 0; i < World.size; i++) {
+	for (var i = Math.floor(-World.size / 2); i < (World.size / 2); i++) {
 		World.grid[i] = [];
-		for (var j = 0; j < World.size; j++) {
+		for (var j = Math.floor(-World.size / 2); j < (World.size / 2); j++) {
 			World.grid[i][j] = false;
 		}
 	}
@@ -33,11 +33,11 @@ World.clear(128);
  * Determine if a grid point is solid or not.
  */
 World.isSolid = function(x,y) {
-	// Check if out of world bounds
-	if (x < 0 || y < 0) { return true; }
-	if (x >= World.size || y >= World.size) { return true; }
 	// Otherwise read from grid
-	return World.grid[x << 0][y << 0];
+	var column = World.grid[ Math.floor(x) ];
+	if (!column) { return true; }
+	var cell = column[Math.floor(y)];
+	return cell === true || cell === undefined;
 }
 
 /* WORLD.ISWALKABLE
@@ -136,8 +136,13 @@ World.move = function(x,y , r, vx,vy) {
 World.addPlayer = function(x, y){
 	World.player = GameObject.add(new GameObject(x, y, GameAsset.player, playerThink));
 }
+
 World.addTree = function(x, y){
 	var trunk = new GridObject(x, y, GameAsset.treeTrunk);
 	var body = new GameObject(x+0.5, y+0.5, GameAsset.treeBody);
 	GameObject.add(body);
+}
+
+World.addHuman = function(x,y){
+	GameObject.add(new GameObject(x, y, GameAsset.player, humanThink));
 }

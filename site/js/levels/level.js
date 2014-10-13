@@ -30,8 +30,8 @@ Level.prototype.generateContent = function(){
 	var density = numTrees / (World.size*World.size);
 	
 	// Each grid cell has independent probability of containing tree
-	for(var x=0; x < World.size; x++){
-		for(var y=0; y < World.size; y++){
+	for(var x = Math.floor(-World.size/2); x < World.size/2; x++){
+		for(var y = Math.floor(-World.size/2); y < World.size; y++){
 			// Skip cell if contained in a static region
 			var skip = false;
 			for(var i=0; i < this.staticRegions.length; i++) {
