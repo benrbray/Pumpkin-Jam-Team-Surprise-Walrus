@@ -5,21 +5,20 @@
 "use strict"
 
 ////////////////////////////////////////////////////////////////////////////////
-var tick = 0;
+
 // Player
 GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,player) {
 	context.save();
 	// Precomputations ---------------------------------------------------------
 	
-	tick++;
 	// Time-Oscillating tail wag amplitude, increases with proximity to meat
 	var meatDist = meatProximity(player.x, player.y) + 1
-	var tailWag = Math.sin(tick/meatDist/12)/3;
+	var tailWag = Math.sin(World.tick/meatDist/12)/3;
 	
 	// Player speed
 	var playerSpeed =  magnitude(player.vx, player.vy);
 	var legAmplitude = Math.min(0.16, 2 * ( 2/(1+Math.exp(-playerSpeed)) - 1));
-	var legPhase = tick / 3;
+	var legPhase = World.tick / 3;
 	
 	// Entering Player Coordinates ---------------------------------------------
 	
