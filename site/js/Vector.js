@@ -24,10 +24,12 @@ Vector.prototype.multiply = function(k){
 	return new Vector(this.x*k, this.y*k);
 }
 
+// vector pointing from this to that
 Vector.prototype.to = function(v){
 	return v.subtract(this);
 }
 
+// vector pointing from that to this
 Vector.prototype.from = function(v){
 	return this.to(v).multiply(-1);
 }
@@ -36,7 +38,6 @@ Vector.prototype.from = function(v){
 Vector.prototype.norm = function(){
 	return this.multiply(this.mag());
 }
-
 
 // Scalar Operations -----------------------------------------------------------
 
@@ -50,7 +51,8 @@ Vector.prototype.mag = function(){
 }
 // distance to another vector
 Vector.prototype.distTo = function(v){
-	return this.subtract(v)
+	return this.to(v).mag();
+}
 
 Vector.prototype.angle = function(){
 	return Math.atan2(this.y/this.x);
