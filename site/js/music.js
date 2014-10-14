@@ -25,7 +25,7 @@ function updateMusic() {
 	Sounds.musicAction.setVolume( (updateMusic.action) * 0.3 );
 
 
-	if (Math.random() * 60 * 10 < 1) {
+	if (Math.random() * 60 * 30 < 1) {
 		Sounds.hoot.play(false);
 	}
 }
