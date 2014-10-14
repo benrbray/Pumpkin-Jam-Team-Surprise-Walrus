@@ -10,15 +10,8 @@ function draw() {
 	context.clearRect(0,0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	
 	// Establish a zoom level based on Camera desired width
-	var scale = WINDOW_WIDTH / (Camera.tilesHorizontal);
-	context.scale(scale, scale);
-
-	// Center camera on screen
-	context.translate(
-		-(Camera.x - Camera.tilesHorizontal / 2),
-		-(Camera.y - Camera.tilesHorizontal * WINDOW_HEIGHT / WINDOW_WIDTH / 2)
-	);
-
+	Camera.transform(context);
+	
 	// Draw World
 	GridObject.drawAll();
 	GameObject.drawAll();
@@ -37,3 +30,6 @@ function draw() {
 	context.strokeStyle = "rgba(255,255,255,0.5)";
 	context.strokeCircle(Mouse.x,Mouse.y,3);
 }
+
+
+var tileImg = new Image("assets/graphics/grass.png");
