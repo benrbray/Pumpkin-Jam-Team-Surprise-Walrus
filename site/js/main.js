@@ -8,7 +8,7 @@ function mainInit() {
 	// Document & Canvas Setup
 	htmlcanvas.width = WINDOW_WIDTH;
 	htmlcanvas.height = WINDOW_HEIGHT;
-	htmlcanvas.style.background = "#101";
+	htmlcanvas.style.background = "#0D6321";
 	context = htmlcanvas.getContext("2d");
 	
 	// Controls
