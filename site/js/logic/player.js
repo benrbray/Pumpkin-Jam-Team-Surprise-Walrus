@@ -6,17 +6,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function nearestMeat(x,y) {
-	var m = [];
+function meatProximity(x,y) {
+	var meats = [];
 	for (var i = 0; i < GameObject.gameObjects.length; i++) {
-		if (GameObject.gameObjects[i].meat) {
-			m.push(GameObject.gameObjects[i]);
-		}
+		var obj = GameObject.gameObjects[i];
+		if (obj.meat) { meats.push(distance(x,y,obj.x,obj.y)) };
 	}
-	m.sort(function(a,b) {
-		return distance(a.x,a.y,x,y) - distance(b.x,b.y,x,y);
-	});
-	return m[0];//{x:m[0].x,y:m[0].y};
+	meats.sort(function(a,b) { return a-b; });
+	return meats[0];
 }
 
 ////////////////////////////////////////////////////////////////////////////////

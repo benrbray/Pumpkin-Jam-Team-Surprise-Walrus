@@ -9,12 +9,23 @@ var tick = 0;
 // Player
 GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,player) {
 	context.save();
-	// Player Coordinates ------------------------------------------------------
+	// Precomputations ---------------------------------------------------------
+	
+	tick++;
+	// Time-Oscillating tail wag amplitude, increases with proximity to meat
+	var meatDist = meatProximity(player.x, player.y) + 1
+	var tailWag = Math.sin(tick/meatDist/4)/3;
+	
+	// Entering Player Coordinates ---------------------------------------------
 	
 	// Move origin to player center
 	context.translate(x,y);
 	asset.vel.x = player.vx;
 	asset.vel.y = player.vy;
+	
+	// Draw Feet ---------------------------------------------------------------
+	
+	
 	
 	// Move Trailing Segments --------------------------------------------------
 	
@@ -32,27 +43,19 @@ GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,player) {
 		// Rotate in direction of 'follow'
 		segment.dir = segment.dir.rotateTowards2(follow.dir, segment.spring);
 		
-		// Draw beginpath moveto lineto stroke
+		// Draw
 		context.save();
-		context.fillStyle = "rgba(0,0,0,0.5)";
-		context.translate(segment.pos.x, segment.pos.y);
-		
-		var offset = 0;
-		if(i==3){
-			offset = Math.sin(tick*Math.sin(tick/200)/30)/3;
-			tick++;
-		}
-		
-		context.rotate(segment.dir.angle()+offset);
-		if(segment.img){
-			context.drawImage(
-				segment.img,					// image
-				-segment.size,	// top-left x
-				-segment.width/2, 				// top-left y
-				segment.size,					// length
-				segment.width					// thickness
-			);
-		}
+			context.translate(segment.pos.x, segment.pos.y);
+			context.rotate(segment.dir.angle()+(i==3?tailWag:0));
+			if(segment.img){
+				context.drawImage(
+					 segment.img,		// image
+					-segment.size,		// top-left x
+					-segment.width/2, 	// top-left y
+					 segment.size,		// length
+					 segment.width		// thickness
+				);
+			}
 		context.restore();
 	}
 	
@@ -81,7 +84,7 @@ GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,player) {
 	);
 	context.restore();
 	
-	// -------------------------------------------------------------------------
+	// Exiting Player Coordinates ----------------------------------------------
 	context.restore();
 });
 
