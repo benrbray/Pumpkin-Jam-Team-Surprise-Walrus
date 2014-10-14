@@ -1,3 +1,26 @@
+/* PLAYER.JS
+ * 
+ */
+
+"use strict";
+
+////////////////////////////////////////////////////////////////////////////////
+
+function nearestMeat(x,y) {
+	var m = [];
+	for (var i = 0; i < GameObject.gameObjects.length; i++) {
+		if (GameObject.gameObjects[i].meat) {
+			m.push(GameObject.gameObjects[i]);
+		}
+	}
+	m.sort(function(a,b) {
+		return distance(a.x,a.y,x,y) - distance(b.x,b.y,x,y);
+	};
+	return m[0];//{x:m[0].x,y:m[0].y};
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 function playerThink(player) {
 	if (player.leapwait === undefined) {
 		// Setup leaping attributes
