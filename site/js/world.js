@@ -165,6 +165,12 @@ World.addHuman = function(x,y, gun){
 	GameObject.add(hu);
 }
 
+World.addZombie = function(x,y) {
+	var zom = new GameObject(x,y, GameAsset.humanZombie, zombieThink);
+	new Light(zom, 2, 0.5, 200, 200, 100);
+	GameObject.add(zom);
+}
+
 World.addAnimal = function(x,y) {
 	var an;
 	if (Math.random() < 1) {
