@@ -15,6 +15,8 @@ Levels[0] = new Level("Test Level", function(level){
 	World.addTree(-15,-15);
 	World.addTree(-15,-12);
 	World.addTree(-15,-15);
+
+	World.settlements = ["Cabin","Tents","Horde","Campfire","Houses"];
 	
 	// Cabin Settlement
 	level.staticRegions.push( new GridRegion(2,2, 4,7 ) );

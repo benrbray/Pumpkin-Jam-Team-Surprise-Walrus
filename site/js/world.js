@@ -28,7 +28,6 @@ World.clear = function(size) {
 		}
 	}
 }
-//World.clear(128);
 
 //// GEOMETRY //////////////////////////////////////////////////////////////////
 
@@ -179,7 +178,7 @@ World.addZombie = function(s,x,y) {
 World.addAnimal = function(x,y) {
 	var an;
 	if (Math.random() < 1) {
-		an = new GameObject(x,y,GameAsset.squirrel, squirrelThink);
+		an = new GameObject(x,y, Math.random() < 0.5 ? GameAsset.squirrel : GameAsset.bunny, squirrelThink);
 	}
 	GameObject.add(an);
 }

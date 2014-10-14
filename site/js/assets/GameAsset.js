@@ -81,3 +81,12 @@ GameAsset.drawSprite = function(x, y, obj){
 		);
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+GameAsset.ihouse0 = new Image();
+GameAsset.ihouse0.src = "assets/graphics/houseicon.png";
+GameAsset.ihouse1 = new Image();
+GameAsset.ihouse1.src = "assets/graphics/houseiconhalf.png";
+GameAsset.ihouse2 = new Image();
+GameAsset.ihouse2.src = "assets/graphics/houseiconlit.png";

@@ -86,6 +86,25 @@ function drawInfoBar(){
 		}
 		context.fillRect(i * 18+10.5,10.5,16,30);
 	}
+	// Settlements
+	for (var i = 0; i < World.settlements.length; i++) {
+		var num = 0;
+		var icon = GameAsset.ihouse0;
+		for (var j = 0; j < GameObject.gameObjects.length; j++) {
+			if (GameObject.gameObjects[j].settlement == World.settlements[i]) {
+				num++;
+			}
+		}
+		if (num > 0) {
+			icon = GameAsset.ihouse2;
+		}
+		context.drawImage(icon,WINDOW_WIDTH - 24,8 + 24 * i);
+		context.fillStyle = "#DB0000";
+		context.font = "16px 'Walter Turncoat'";
+		context.textAlign = "right";
+		context.textBaseline = "middle";
+		context.fillText( "[" + num + "] " + World.settlements[i] , WINDOW_WIDTH - 24 - 8, 24 * i + 12 + 7 );
+	}
 }
 
 //// Cursor --------------------------------------------------------------------
