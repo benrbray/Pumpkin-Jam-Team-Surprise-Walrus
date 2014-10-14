@@ -117,9 +117,9 @@ function humanThink(h) {
 					canSee = true;
 				}
 			}
+			var dx = nearestThreat.x - h.x;
+			var dy = nearestThreat.y - h.y;
 			if (canSee) {
-				var dx = nearestThreat.x - h.x;
-				var dy = nearestThreat.y - h.y;
 				var dm = magnitude(dx,dy);
 				dx /= dm;
 				dy /= dm;
@@ -136,7 +136,7 @@ function humanThink(h) {
 				h.glaring = true;
 				h.firing--;
 				if (h.firing == 1) {
-					if (canSee) {
+					if (canSee && anglebetween(h.drawx,h.drawy,dx,dy) <= 0.5) {
 						// FIRE
 						for (var k = 0; k < 10; k++) {
 							var p = new Particle(
@@ -149,6 +149,7 @@ function humanThink(h) {
 							p.vx *= 3;
 							p.vy *= 3;
 						}
+						Sounds.gun.play(false);
 						nearestThreat.health -= 4;
 						h.reload = 60;
 					}
