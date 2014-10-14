@@ -2,6 +2,8 @@
 // Manages sound playback and volume
 
 function updateMusic() {
+	if (isGameOver) return;
+
 	var mindist = 14;
 
 	for (var i = 0; i < GameObject.gameObjects.length; i++) {

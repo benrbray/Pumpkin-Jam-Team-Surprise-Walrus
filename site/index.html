@@ -4,18 +4,19 @@
 	<title>Pumpkin Jam - Team Surprise Walrus</title>
 
 	<!-- Styles and Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Walter+Turncoat' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Helper Functions -->
 	<script type="text/javascript" src="js/helper.js"></script>
 	<script type="text/javascript" src="js/Vector.js"></script>
-	
+
 	<!-- Classes -->
 	<script type="text/javascript" src="js/classes/GridObject.js"></script>
 	<script type="text/javascript" src="js/classes/GridRegion.js"></script>
 	<script type="text/javascript" src="js/classes/GameObject.js"></script>
-	
+
 	<!-- Assets -->
 	<script type="text/javascript" src="js/assets/GameAsset.js"></script>
 	<script type="text/javascript" src="js/assets/player_asset.js"></script>
@@ -23,24 +24,24 @@
 	<script type="text/javascript" src="js/assets/human_asset.js"></script>
 	<script type="text/javascript" src="js/assets/natural_assets.js"></script>
 	<script type="text/javascript" src="js/assets/camp_assets.js"></script>
-	
+
 	<!-- Game Components -->
 	<script type="text/javascript" src="js/controls.js"></script>
 	<script type="text/javascript" src="js/world.js"></script>
 	<script type="text/javascript" src="js/camera.js"></script>
 	<script type="text/javascript" src="js/particle.js"></script>
 	<script type="text/javascript" src="js/light.js"></script>
-	
+
 	<!-- Levels -->
 	<script type="text/javascript" src="js/levels/level.js"></script>
 	<script type="text/javascript" src="js/levels/level0.js"></script>
-	
+
 	<!-- Player Logic -->
 	<script type="text/javascript" src="js/logic/player.js"></script>
 	<script type="text/javascript" src="js/logic/human.js"></script>
 	<script type="text/javascript" src="js/logic/squirrel.js"></script>
 	<script type="text/javascript" src="js/logic/zombie.js"></script>
-	
+
 	<!-- Game Control -->
 	<script type="text/javascript" src="js/audio.js"></script>
 	<script type="text/javascript" src="js/music.js"></script>
@@ -58,6 +59,13 @@
 			<div class="overlaycontent">
 				<p>Despite your best efforts, you were unable to expel the invading monsters from your land.</p>
 				<div class="buttons"><a href="#" class="button tryagain" onClick="gameRestart()">Try Again</a></div>
+			</div>
+		</div>
+		<div id="gamewin">
+			<h2>You Win!</h2>
+			<div class="overlaycontent">
+				<p>Congradulations! You were successfully able to expel the invading monsters from your land.</p>
+				<div class="buttons"><a href="#" class="button tryagain" onClick="gameRestart()">Play Again</a></div>
 			</div>
 		</div>
 		<h3>Stats</h3>

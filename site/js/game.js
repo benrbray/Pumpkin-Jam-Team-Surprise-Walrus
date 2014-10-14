@@ -4,8 +4,6 @@
 
 "use strict";
 
-////////////////////////////////////////////////////////////////////////////////
-
 var Stat = {};
 
 var isGameOver = false;
@@ -34,6 +32,12 @@ function gameRestart() {
 
 function gameOver() {
 	isGameOver = true;
+
+	Sounds.musicMeadow.setVolume(0);
+	Sounds.musicAction.setVolume(0);
+	Sounds.lose.setVolume(.7);
+	Sounds.lose.play();
+
 	document.getElementById('killnum').innerHTML = Stat.animals + Stat.humans;
 	document.getElementById('killnum_human').innerHTML = Stat.humans;
 	document.getElementById('killnum_animals').innerHTML = Stat.animals;
@@ -51,32 +55,32 @@ function gameUpdate(){
 	// For computing distance travelled
 	Stat.px = World.player.x;
 	Stat.py = World.player.y;
-	
+
 	// Update Everything
 	World.tick++;
 	GameObject.updateAll();
-	
+
 	// Stat -- Record distance travelled
 	Stat.steps += distance(Stat.px,Stat.py,World.player.x,World.player.y) * 2;
-	
+
 	// Draw Everything
 	draw();
 	requestAnimationFrame(gameUpdate);
-	
+
 	// Move Camera
 	Camera.x = Camera.x * 0.7 + World.player.x * 0.3;
 	Camera.y = Camera.y * 0.7 + World.player.y * 0.3;
-	
+
 	// Update mouse world position
 	var world = Camera.fromScreen(Mouse.x,Mouse.y);
 	Mouse.worldx = world[0];
 	Mouse.worldy = world[1];
-	
-	
+
+
 	if (World.player.health <= 0 && !isGameOver) {
 		// GAME OVER
 		gameOver();
 	}
-	
+
 	updateMusic();
 }
