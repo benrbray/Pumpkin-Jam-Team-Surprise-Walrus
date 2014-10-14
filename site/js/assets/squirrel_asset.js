@@ -7,8 +7,11 @@
 
 GameAsset.squirrel = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 	context.save();
+	if (!obj.rand) {
+		obj.rand = Math.random() * Math.PI;
+	}
 	// Save to leave untouched by this function
-	context.translate(x,y);
+	context.translate(x,y - Math.abs(Math.cos(obj.rand + (new Date()).getTime() / 120.0  )) / 3.0  );
 	// Move context origin to player's center
 	if (magnitude(obj.vx, obj.vy) > 0.03) {
 		// If the player is moving at least a little...
