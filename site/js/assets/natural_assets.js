@@ -46,3 +46,5 @@ GameAsset.treeBody.img.src = "assets/graphics/tree1.png";
 
 GameAsset.grassImg = new Image();
 GameAsset.grassImg.src = "assets/graphics/grass.png";
+
+GameAsset.log = new GameAsset(4,1,false,"assets/graphics/log1.png");

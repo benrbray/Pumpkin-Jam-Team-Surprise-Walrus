@@ -56,6 +56,17 @@ Level.prototype.generateContent = function(){
 					}
 				}
 			}
+			var logPlace = true;
+			for (var j = x; j >= x - 3; j--) {
+				if (World.isSolid(j,y)) {
+					logPlace = false;
+				}
+			}
+			if (logPlace && Math.random() < 1/400) {
+				new GridObject(x-3,y,GameAsset.log);
+
+			}
+
 		}
 	}
 	// Generate Rocks?
