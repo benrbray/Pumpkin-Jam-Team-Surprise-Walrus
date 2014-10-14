@@ -8,10 +8,11 @@ var WINDOW_HEIGHT = 600;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function canvas() {
+function canvas(scale) {
+	scale = scale || 1;
 	var c = document.createElement("canvas");
-	c.width = WINDOW_WIDTH;
-	c.height = WINDOW_HEIGHT;
+	c.width = WINDOW_WIDTH * scale;
+	c.height = WINDOW_HEIGHT * scale;
 	return c;
 }
 
