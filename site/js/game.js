@@ -1,7 +1,7 @@
 /* GAME.JS
  *
  */
- 
+
 "use strict";
 
 var Stat = {};
@@ -29,7 +29,16 @@ function gameRestart() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function gameOver() {
-	htmlgameover.style.display = "block";
+	document.getElementById('killnum').innerHTML = Stat.animals + Stat.humans;
+	document.getElementById('killnum_human').innerHTML = Stat.humans;
+	document.getElementById('killnum_animals').innerHTML = Stat.animals;
+
+	document.getElementById('lunge_count').innerHTML = Stat.lunges;
+	document.getElementById('steps_taken').innerHTML = Stat.steps;
+
+	document.getElementById('gameover').style.opacity = 1;
+
+/*	htmlgameover.style.display = "block";
 	htmlgameover.opacity = 1;
 	var summary = "";
 	summary += "<p>";
@@ -37,7 +46,7 @@ function gameOver() {
 	summary += "and killed <strong>" + Stat.humans + " humans</strong>. ";
 	summary += "<p>";
 	summary += "You took <strong>" + (Stat.steps << 0) + " steps</strong> and";
-	summary += "<strong>lunged " + Stat.lunges + " times</strong>.";
+	summary += "<strong>lunged " + Stat.lunges + " times</strong>.";*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////

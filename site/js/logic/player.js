@@ -42,6 +42,7 @@ function playerThink(player) {
 	var drawmag = magnitude(player.drawx,player.drawy);
 	if (Keyboard.SPACE && player.leapwait === 0 && drawmag > 0) {
 		// Start leaping
+		Stat.lunge++;
 		player.leapwait = 55;
 		player.leapx = player.drawx / drawmag;
 		player.leapy = player.drawy / drawmag;
@@ -71,6 +72,7 @@ function playerThink(player) {
 			}
 			if (player.attacks == 0) {
 				player.health = Math.min( 9, player.health + 1 );
+				console.log(player.attacktarget);
 				player.attacktarget.die();
 			}
 		}

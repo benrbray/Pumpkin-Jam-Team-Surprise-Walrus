@@ -1,3 +1,15 @@
+html, body {
+	margin: 0px;
+	padding:0px;
+	border-width: 0px;
+	font-size:16px;
+}
+
+body {
+	background:#302;
+	min-height:100%;
+}
+
 #htmlscreen {
 	position:fixed;
 	left:50%;
@@ -12,6 +24,48 @@
 	backgrond:white;
 }
 
-body {
-	background:#302;
+#gameover {
+	opacity:0;
+	z-index:2;
+	width:788px;
+	padding-bottom:10px;
+	border:1px solid #888;
+	height:388px;
+	background-color:#fff;
+	position:absolute;
+	top: 50%;
+	left: 50%;
+
+	margin-left: -395px;
+	margin-top:-200px;
+
+	-webkit-box-shadow: 0px 0px 24px 0px #000000;
+	-moz-box-shadow: 0px 0px 24px 0px #000000;
+	box-shadow: 0px 0px 24px 0px #000000;
+
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+}
+
+#gameover h2, h3 {
+	font-size:2em;
+	margin:0px;
+	background-color:#888;
+	padding: 10px
+}
+
+#gameover h3 {
+	font-size:1.5em;
+	background-color:#ddd;
+}
+
+#gameover ul {
+	margin:0px;
+}
+
+#gameover > * {
+	padding:10px;
 }
