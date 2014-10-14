@@ -1,14 +1,19 @@
 var Sounds = {};
-function getAudioData(url, callback, audioContext) {
+var loaded_sounds = 0;
+
+function getAudioData(url, obj, audioContext) {
 	var request = new XMLHttpRequest();
 	request.open("GET", url, true);
 	request.responseType = "arraybuffer";
 
 	request.onload = function() {
+		loaded_sounds++;
 		audioContext.decodeAudioData(request.response, function(data) {
-				callback(data, undefined);
+				obj.data = data;
+				obj.audioLoaded();
 			},
 			function() {
+				obj.err = true;
 				console.log("Error decoding file '" + url + "'" );
 			});
 	}
@@ -17,18 +22,30 @@ function getAudioData(url, callback, audioContext) {
 
 Sounds.sound = function(url){
 	this.url = url;
-	this.buffer = null;
+	this.data = null;
 	this.audioContext = new AudioContext();
+	this.err = false;
+
+	this.loadCallback = null;
+
+	getAudioData(this.url, this, this.audioContext);
+
+	this.audioLoaded = function(){
+		if (this.loadCallback !== null) this.loadCallback();
+	}
+
+	this.onload = function(callback){
+		if (!this.err && this.data !== null) callback();
+		else this.loadCallback = callback;
+	}
 
 	this.play = function(loop){
-		var obj = this;
-		getAudioData(this.url, function(data) {
-			obj.source = obj.audioContext.createBufferSource();
-			obj.source.buffer = data;
-			obj.source.loop = loop;
-			obj.source.connect(obj.audioContext.destination);
-			obj.source.start(0);
-		}, this.audioContext);
+		if (this.err || this.data === null) return;
+		this.source = this.audioContext.createBufferSource();
+		this.source.buffer = this.data;
+		this.source.loop = loop;
+		this.source.connect(this.audioContext.destination);
+		this.source.start(0);
 	}
 
 	this.pause = function() {
@@ -36,5 +53,11 @@ Sounds.sound = function(url){
 	}
 }
 
-Sounds.musicMeadow = new Sounds.sound("/assets/audio/wandering.mp3");
-Sounds.musicMeadow.play(true);
+Sounds.musicMeadow = new Sounds.sound("assets/audio/wandering.mp3");
+Sounds.blood = new Sounds.sound("assets/audio/blood2.mp3");
+
+Sounds.musicMeadow.onload(function(){
+	this.play(true);
+});
+
+Sounds.blood.play(false);
