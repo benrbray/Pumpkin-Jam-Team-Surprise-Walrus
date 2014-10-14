@@ -6,8 +6,6 @@
 
 var Stat = {};
 
-////////////////////////////////////////////////////////////////////////////////
-
 function gameInit(){
 	Stat.animals = 0;
 	Stat.humans = 0;
@@ -18,15 +16,11 @@ function gameInit(){
 	GameObject.fixDepth();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 function gameRestart() {
 	gameInit();
 	htmlgameover.style.display = "none";
 	htmlgameover.style.opacity = 0;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 function gameOver() {
 	document.getElementById('killnum').innerHTML = Stat.animals + Stat.humans;
@@ -34,22 +28,13 @@ function gameOver() {
 	document.getElementById('killnum_animals').innerHTML = Stat.animals;
 
 	document.getElementById('lunge_count').innerHTML = Stat.lunges;
-	document.getElementById('steps_taken').innerHTML = Stat.steps;
+	document.getElementById('steps_taken').innerHTML = Math.round(Stat.steps);
 
-	document.getElementById('gameover').style.opacity = 1;
+	document.getElementById('gameover').style.display = "block";
+	document.getElementById('gameoverlay').style.display = "block";
 
-/*	htmlgameover.style.display = "block";
-	htmlgameover.opacity = 1;
-	var summary = "";
-	summary += "<p>";
-	summary += "You hunted <strong>" + Stat.animals + " small animals</strong> ";
-	summary += "and killed <strong>" + Stat.humans + " humans</strong>. ";
-	summary += "<p>";
-	summary += "You took <strong>" + (Stat.steps << 0) + " steps</strong> and";
-	summary += "<strong>lunged " + Stat.lunges + " times</strong>.";*/
+	setTimeout(function(){document.getElementById('gameoverlay').style.opacity = 1;}, 30);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 function gameUpdate(){
 	// Update Everything
@@ -62,7 +47,7 @@ function gameUpdate(){
 
 	// Stat -- Record distance travelled
 	Stat.steps += distance(Stat.px,Stat.py,World.player.x,World.player.y) * 2;
-	
+
 	// Draw Everything
 	draw();
 	requestAnimationFrame(gameUpdate);

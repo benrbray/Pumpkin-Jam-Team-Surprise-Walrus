@@ -1,5 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-
 function playerThink(player) {
 	if (player.leapwait === undefined) {
 		// Setup leaping attributes
@@ -42,7 +40,7 @@ function playerThink(player) {
 	var drawmag = magnitude(player.drawx,player.drawy);
 	if (Keyboard.SPACE && player.leapwait === 0 && drawmag > 0) {
 		// Start leaping
-		Stat.lunge++;
+		Stat.lunges++;
 		player.leapwait = 55;
 		player.leapx = player.drawx / drawmag;
 		player.leapy = player.drawy / drawmag;
@@ -73,6 +71,8 @@ function playerThink(player) {
 			if (player.attacks == 0) {
 				player.health = Math.min( 9, player.health + 1 );
 				console.log(player.attacktarget);
+				if (player.attacktarget.human) Stat.humans++;
+				else Stat.animals++;
 				player.attacktarget.die();
 			}
 		}

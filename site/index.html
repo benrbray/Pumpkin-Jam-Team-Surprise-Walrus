@@ -2,7 +2,11 @@
 <html lang=en>
 <head>
 	<title>Pumpkin Jam - Team Surprise Walrus</title>
+
+	<!-- Styles and Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/style.css">
+
 	<!-- Helper Functions -->
 	<script type="text/javascript" src="js/helper.js"></script>
 	<script type="text/javascript" src="js/Vector.js"></script>
@@ -46,19 +50,26 @@
 	<div id="htmlscreen">
 		<canvas id="htmlcanvas"></canvas>
 	</div>
-	<div id="gameover">
-		<h2>Game Over</h2>
-		<p>Story goes here</p>
+	<div id="gameoverlay">
+		<div id="gameover">
+			<h2>Game Over</h2>
+			<div class="overlaycontent">
+				<p>Despite your best efforts, you were unable to expel the invading monsters from your land.</p>
+				<div class="buttons"><a href="#" class="button tryagain">Try Again</a></div>
+			</div>
+		</div>
 		<h3>Stats</h3>
-		<ul class="stats">
-			<li>Kills: <span id="killnum"></span></li>
-			<ul>
-				<li>Humans: <span id="killnum_human"></span></li>
-				<li>Animals: <span id="killnum_animals"></span></li>
+		<div class="overlaycontent">
+			<ul class="stats">
+				<li>Kills: <span id="killnum"></span></li>
+				<ul>
+					<li>Humans: <span id="killnum_human"></span></li>
+					<li>Animals: <span id="killnum_animals"></span></li>
+				</ul>
+				<li>Steps Taken: <span id="steps_taken"></span></li>
+				<li>Lunges: <span id="lunge_count"></span></li>
 			</ul>
-			<li>Steps Taken: <span id="steps_taken"></span></li>
-			<li>Lunges: <span id="lunge_count"></span></li>
-		</ul>
+		</div>
 	</div>
 	<script type="text/javascript">
 	mainInit();

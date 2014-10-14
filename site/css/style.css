@@ -24,48 +24,82 @@ body {
 	backgrond:white;
 }
 
-#gameover {
+#gameoverlay {
+	font-size:1.7em;
+	display:none;
 	opacity:0;
 	z-index:2;
 	width:788px;
 	padding-bottom:10px;
 	border:1px solid #888;
-	height:388px;
-	background-color:#fff;
+	height:588px;
+	background-color:#333;
+	color:#fff;
+	font-family: 'Amatic SC', cursive;
+
 	position:absolute;
 	top: 50%;
 	left: 50%;
 
 	margin-left: -395px;
-	margin-top:-200px;
+	margin-top:-300px;
 
 	-webkit-box-shadow: 0px 0px 24px 0px #000000;
 	-moz-box-shadow: 0px 0px 24px 0px #000000;
 	box-shadow: 0px 0px 24px 0px #000000;
 
-	-webkit-transition: all 1s ease-in-out;
-	-moz-transition: all 1s ease-in-out;
-	-ms-transition: all 1s ease-in-out;
-	-o-transition: all 1s ease-in-out;
-	transition: all 1s ease-in-out;
+	-webkit-transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-ms-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
 }
 
-#gameover h2, h3 {
-	font-size:2em;
+#gameoverlay h2, h3 {
+	font-size:1.6em;
 	margin:0px;
-	background-color:#888;
-	padding: 10px
+	background-color:#777;
+	padding: 10px;
+	font-family: 'Amatic SC', cursive;
+	font-weight: 500;
+	color:#000;
 }
 
-#gameover h3 {
-	font-size:1.5em;
-	background-color:#ddd;
+#gameoverlay h3 {
+	font-size:1.2em;
+	background-color:#666;
 }
 
-#gameover ul {
+#gameoverlay ul {
 	margin:0px;
 }
 
-#gameover > * {
+#gameoverlay #gameover {
+	display: none;
+}
+
+#gameoverlay .overlaycontent {
 	padding:10px;
+}
+
+#gameoverlay .buttons {
+	text-align:center;
+	padding-bottom:30px;
+}
+
+a.button.tryagain{
+	display:inline-block;
+	padding:20px;
+	border:1px solid #222;
+	border-radius:10px;
+	background-color:#c73;
+
+	background: -moz-linear-gradient(top, #ffa319 0%, #dd8844 50%, #dd8444 51%, #cc7733 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffa319), color-stop(50%,#dd8844), color-stop(51%,#dd8444), color-stop(100%,#cc7733));
+	background: -webkit-linear-gradient(top, #ffa319 0%,#dd8844 50%,#dd8444 51%,#cc7733 100%);
+	background: linear-gradient(to bottom, #ffa319 0%,#dd8844 50%,#dd8444 51%,#cc7733 100%);
+
+	color: #fff;
+	font-size:1.25em;
+	text-decoration:none;
 }
