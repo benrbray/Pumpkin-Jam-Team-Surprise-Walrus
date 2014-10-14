@@ -33,14 +33,14 @@ function draw() {
 	
 	// Draw Lights
 	context.fillStyle = "rgba(255,255,0,0.25)"; // light color
-	//Light.drawAll(context);
+	//Light.drawAll(context); // Cheap lighting
 	
 	// Reset Canvas Coordinates for drawing GUI
 	context.setTransform(1,0,0,1,0,0);
 	
 	// Screen Coordinates ------------------------------------------------------
 	
-	drawLighting(); //expensive way
+	drawLighting(); //Expensive lighting
 	
 	drawGUI();
 	drawCursor();
