@@ -19,6 +19,13 @@ function Light(gameObject, radius, intensity, r, g, b){
 	this.getColor = function(){
 		return htmlColor(r,g,b,intensity);
 	}
+	
+	// Light layers
+	this.radii = [];
+	this.offsets = [];
+	this.angles = [];
+	
+	// Add to lights
 	Light.add(this);
 }
 
@@ -34,10 +41,10 @@ Light.add = function(light){
 
 /* LIGHT.DRAWALL
  */
-Light.drawAll = function(ctx){
+Light.drawAll = function(ctx, layer){
 	Light.time++;
 	for(var i = 0; i < Light.lights.length; i++){
-		Light.lights[i].drawLight(ctx, 0);
+		Light.lights[i].drawLight(ctx, layer);
 	}
 }
 
@@ -48,15 +55,46 @@ Light.drawAll = function(ctx){
  * @param (layer) Integer >= 0
  */
 Light.prototype.drawLight = function(ctx, layer){
-	// Generate random size/location
-	var rx = this.gameObject.x + rnd()*0.1;	// additive offset
-	var ry = this.gameObject.y + rnd()*0.1;	// additive offset
-	var rw = this.radius * (1+rnd()/100/(layer+1));	// multiplicative offset
-	var rh = this.radius * (1+rnd()/100/(layer+1));	// multiplicative offset
+	// randomize every few frames
+	if(!this.radii[layer] || World.tick % (5+layer) == 0){
+		// random size
+		var rx = rnd()*0.2;	// additive offset
+		var ry = rnd()*0.2;	// additive offset
+		// random location
+		var radiusMean = this.radius - layer/10;
+		var radiusVariation = layer/100;
+		var rw = radiusMean * (1+rnd()*radiusVariation);	// multiplicative offset
+		var rh = radiusMean * (1+rnd()*radiusVariation);	// multiplicative offset
+		// Pick random angles around a circle, for imperfect circles
+		var layerAngles = [];
+		for(var i = 0; i < 35; i++){
+			layerAngles[i] = Math.random() * Math.PI * 2;
+		}
+		// store all
+		this.radii[layer] = new Vector(rw,rh);
+		this.offsets[layer] = new Vector(rx,ry);
+		this.angles[layer] = layerAngles.sort(function(a,b){ return a-b; });
+	}
 	
-	// Draw Ellipse
-	//ctx.fillStyle = this.getColor();
-	ctx.fillEllipse(rx, ry, rw, rh);
+	// Now, draw...
+	var r = this.radii[layer];
+	var o = this.offsets[layer];
+	var a = this.angles[layer];
+	
+	// Draw polygon with vertices on circle (for imperfect, cartoony circles)
+	ctx.save();
+		ctx.translate(this.gameObject.x+o.x, this.gameObject.y+o.y);
+		ctx.beginPath();
+		// moveTo() for first point
+		ctx.moveTo(r.x * Math.cos(a[0]), r.y * Math.sin(a[0]));
+		// lineTo() for remaining points
+		for(var i = 1; i < a.length; i++){
+			ctx.lineTo(r.x * Math.cos(a[i]), r.y * Math.sin(a[i]));
+		}
+		ctx.closePath();
+		ctx.fill();
+		//ctx.fillEllipse(0, 0, r.x, r.y);
+	ctx.restore();
 }
 
 Light.remove = function(obj) {
@@ -107,7 +145,7 @@ function drawLighting() {
 
 	for (var i = 0; i < 3; i++) {
 		ctxs[i].fillStyle = "#FFF3BA"; // Pale yellow
-		Light.drawAll( ctxs[i] );
+		Light.drawAll( ctxs[i] , i);
 		ctxs[i].restore();
 		// Draw each layer of lights
 	}
