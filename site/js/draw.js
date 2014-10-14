@@ -21,6 +21,7 @@ function draw() {
 	GameObject.drawAll();
 	
 	Particle.drawParticles();
+	Light.drawAll();
 	
 	// Reset Canvas Coordinates for drawing GUI
 	context.setTransform(1,0,0,1,0,0);

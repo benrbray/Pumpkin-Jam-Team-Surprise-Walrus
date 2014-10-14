@@ -11,7 +11,7 @@ Levels[0] = new Level("Test Level", function(){
 	var cabin = new GridObject(2,2, GameAsset.cabin);
 	
 	// Define Player
-	var player = World.addPlayer(1,1);
+	World.addPlayer(1,1);
 	
 	// Manually add trees
 	World.addTree(10,10);
@@ -23,6 +23,8 @@ Levels[0] = new Level("Test Level", function(){
 	World.addHuman(6,6);
 	World.addHuman(6,7);
 	World.addHuman(6,9);
+	
+	var playerLight = new Light(World.player, 2, 0.5, 200, 200, 100);
 	
 	// Spawn Trees
 	// Spawn Mortals

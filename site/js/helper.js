@@ -43,6 +43,8 @@ function gridOfSize(w, h, val){
 	return grid;
 }
 
+//// Drawing -------------------------------------------------------------------
+
 CanvasRenderingContext2D.prototype.fillCircle = function(x,y,radius){
 	this.beginPath();
 	this.arc(x,y,radius,0,2*Math.PI);
@@ -54,6 +56,22 @@ CanvasRenderingContext2D.prototype.strokeCircle = function(x,y,radius){
 	this.arc(x,y,radius,0,2*Math.PI);
 	this.stroke();
 }
+
+CanvasRenderingContext2D.prototype.fillEllipse = function(x,y,rx,ry){
+	// remember current coordinate transform
+	this.save();
+	// stretch coordinate axes to prepare for ellipse drawing
+	this.translate(x-rx, y-ry);
+	this.scale(rx, ry);
+	// draw circle in stretched coordinates
+	this.beginPath();
+	this.arc(1, 1, 1, 0, 2 * Math.PI, false);
+	this.fill();
+	// restore to original, unstretched coordinates
+	this.restore();
+}
+
+//// Misc ----------------------------------------------------------------------
 
 function assert(condition, message) {
 	if (!condition) {
