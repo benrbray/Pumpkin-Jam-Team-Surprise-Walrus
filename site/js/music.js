@@ -20,7 +20,13 @@ function updateMusic() {
 		updateMusic.action -= 1/180;
 	}
 	updateMusic.action = Math.max(0,Math.min(updateMusic.action,1));
-	Sounds.musicMeadow.setVolume( (1-updateMusic.action) * 0.2 );
-	Sounds.musicAction.setVolume( (updateMusic.action) * 0.2 );
+
+	Sounds.musicMeadow.setVolume( (1-updateMusic.action) * 0.15 );
+	Sounds.musicAction.setVolume( (updateMusic.action) * 0.3 );
+
+
+	if (Math.random() * 60 * 10 < 1) {
+		Sounds.hoot.play(false);
+	}
 }
 updateMusic.action = 0;
