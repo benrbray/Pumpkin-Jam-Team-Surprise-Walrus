@@ -12,8 +12,8 @@
 function GridRegion(x, y, w, h){
 	this.x = x;				// tiles
 	this.y = y;				// tiles
-	this.width = width;		// tiles
-	this.height = height;	// tiles
+	this.width = w;		// tiles
+	this.height = h;	// tiles
 }
 
 GridRegion.prototype.contains = function(x, y){

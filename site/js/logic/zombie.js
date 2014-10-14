@@ -60,7 +60,7 @@ function zombieThink(h) {
 		this.wx = dx;
 		this.wy = dy;
 	}
-	if (Math.random() * 60 * 10 < 1 && mag(dx,dy) < 6) {
+	if (Math.random() * 60 * 10 < 1 && magnitude(dx,dy) < 6) {
 		Sounds.brains.play(false);
 	}
 	if (magnitude(dx,dy) < 0.6) {

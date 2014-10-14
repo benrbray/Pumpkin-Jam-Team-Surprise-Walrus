@@ -162,15 +162,17 @@ World.addTree = function(x, y){
 	GameObject.add(body);
 }
 
-World.addHuman = function(x,y, gun){
+World.addHuman = function(s,x,y, gun){
 	var hu = new GameObject(x, y, gun ? GameAsset.humanGun : GameAsset.humanPlain, humanThink);
 	new Light(hu, 2, 0.5, 200, 200, 100);
+	hu.settlement = s;
 	GameObject.add(hu);
 }
 
-World.addZombie = function(x,y) {
+World.addZombie = function(s,x,y) {
 	var zom = new GameObject(x,y, GameAsset.humanZombie, zombieThink);
 	new Light(zom, 2, 0.5, 200, 200, 100);
+	zom.settlement = s;
 	GameObject.add(zom);
 }
 
