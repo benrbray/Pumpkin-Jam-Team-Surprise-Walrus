@@ -15,7 +15,6 @@ function nearestWolf(x,y) {
 function humanThink(h) {
 	if (h.fear === undefined) {
 		h.fear = 0;
-		h.bold = (Math.random() * 3 << 0) - 1;
 		h.running = 0;
 		h.randomDirection = Math.PI * 2 * Math.random();
 		h.wx = 0;
@@ -27,6 +26,7 @@ function humanThink(h) {
 		h.meat = true;
 		h.human = true;
 		h.armed = h.gameAsset === GameAsset.humanGun;//Math.random() < 0.4;
+		h.bold = h.armed ? 2 : -1;
 		h.reload = 0;
 		h.firing = 0;
 		h.hits = 6;
@@ -44,18 +44,21 @@ function humanThink(h) {
 	if (Math.random() * 80 < 1) {
 		h.randomDirection = Math.PI * 2 * Math.random();
 	}
+	h.fear *= 0.99;
 	if (h.running > 0) {
 		// Panic!
 		h.wx = Math.cos(h.randomDirection);
 		h.wy = Math.sin(h.randomDirection);
 		Light.remove(this);
 		h.running--;
-		h.fear *= 0.99;
 	} else {
 		// Not panicking.
-		if (h.fear > h.bold * 10 + 15) {
+		if (h.fear > 50) {
 			// Start to Panic!
 			h.running = 180 - h.bold * 120;
+			h.maxSpeed = 0.06;
+		} else {
+			h.maxSpeed = 0.02;
 		}
 		// Standard motion: Walk near to homex, homey
 		var tx = h.homex + Math.cos(h.randomDirection) * 3; // Target position
@@ -69,7 +72,6 @@ function humanThink(h) {
 		}
 
 		var nearestThreat = nearestWolf(h.x,h.y);
-
 		if (h.fear > 16 &&
 				World.visible(h.x,h.y, nearestThreat.x,nearestThreat.y)) {
 			// Behave according to bold
@@ -88,10 +90,8 @@ function humanThink(h) {
 		}
 
 		var threatDistance = distance(h.x,h.y, nearestThreat.x,nearestThreat.y);
-		if ( threatDistance < 5 ) {
-			// Apprehensive?
-			h.fear += 1/60/15 * 5; // approximately 24 sec for panic
-		}
+		h.fear += Math.pow(Math.max(0,6 - threatDistance),2) / 20;
+		// Apprehension
 		h.reload--;
 		h.glaring = false;
 		if (h.armed && h.reload <= 0) {

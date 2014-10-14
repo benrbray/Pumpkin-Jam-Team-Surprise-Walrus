@@ -8,4 +8,5 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // Cabin
-GameAsset.cabin = new GameAsset(3,3, false, "assets/graphics/cabin1.png");
+GameAsset.cabin = new GameAsset(4,4, false, "assets/graphics/cabin1.png");
+GameAsset.tent = new GameAsset(2,2, false, "assets/graphics/tent1.png");

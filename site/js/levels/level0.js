@@ -9,7 +9,7 @@
 Levels[0] = new Level("Test Level", function(){
 	// Camp Setup
 	var cabin = new GridObject(2,2, GameAsset.cabin);
-	new Light(cabin, 6, 0.5, 200, 200, 100);
+	new Light({x:4,y:4}, 6, 0.5, 200, 200, 100);
 	
 	// Define Player
 	World.addPlayer(-20,-20);
@@ -20,10 +20,19 @@ Levels[0] = new Level("Test Level", function(){
 	World.addTree(12,13);
 	
 	
-	World.addHuman(6,5,true);
+	World.addHuman(6,5,false);
 	World.addHuman(7,6,false);
-	World.addHuman(1,1,true);
+	World.addHuman(1,1,false);
 	World.addHuman(6,9,false);
-	// Spawn Trees
-	// Spawn Mortals
+
+
+	new GridObject(-10,30, GameAsset.tent);
+	new GridObject(-11,34, GameAsset.tent);
+	new GridObject(-9,34, GameAsset.tent);
+	new Light({x:-10.5,y:33},3, 0.5, 200, 200, 100);
+	World.addHuman(-7,30,true);
+	World.addHuman(-11,30,true);
+	World.addHuman(-8,33,false);
+	World.addHuman(-10,33,false);
+	new GridObject(-12,26, GameAsset.tent);
 });

@@ -17,7 +17,7 @@ function Level(label, initFunction){
 	
 	// Initialization Method
 	this.init = function(worldSize){
-		World.clear(worldSize || 100);
+		World.clear(worldSize || 150);
 		GameObject.clearAll();
 		GridObject.clearAll();
 		initFunction();
