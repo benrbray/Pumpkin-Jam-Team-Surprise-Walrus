@@ -22,9 +22,14 @@ function gameInit(){
 }
 
 function gameRestart() {
-	gameInit();
-	htmlgameover.style.display = "none";
-	htmlgameover.style.opacity = 0;
+	document.getElementById('gameoverlay').style.opacity = 0;
+
+	setTimeout(function(){
+		document.getElementById('gameover').style.display = "none";
+		document.getElementById('gameoverlay').style.display = "none";
+		World.clear();
+		gameInit();
+	}, 500);
 }
 
 function gameOver() {
