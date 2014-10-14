@@ -60,6 +60,12 @@ World.hasSpace = function(x,y,r) {
 }
 
 World.isLit = function(x,y) {
+	for (var i = 0; i < Light.lights.length; i++) {
+		var light = Light.lights[i];
+		if (distance(x,y, light.x,light.y) < light.radius) {
+			return true;
+		}
+	}
 	return false;
 }
 

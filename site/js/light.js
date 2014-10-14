@@ -78,6 +78,7 @@ for (var k = 0; k < 3; k++) {
 }
 
 function drawLighting() {
+
 	var ctxs = [];
 	// Go over 3 canvases
 	for (var i = 0; i < lightingCanvases.length; i++) {
