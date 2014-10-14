@@ -15,7 +15,7 @@ function nearestMeat(x,y) {
 	}
 	m.sort(function(a,b) {
 		return distance(a.x,a.y,x,y) - distance(b.x,b.y,x,y);
-	};
+	});
 	return m[0];//{x:m[0].x,y:m[0].y};
 }
 
@@ -64,6 +64,7 @@ function playerThink(player) {
 	if (Keyboard.SPACE && player.leapwait === 0 && drawmag > 0) {
 		// Start leaping
 		Stat.lunges++;
+		Sounds.bark.play(false);
 		player.leapwait = 55;
 		player.leapx = player.drawx / drawmag;
 		player.leapy = player.drawy / drawmag;

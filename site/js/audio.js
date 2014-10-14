@@ -72,6 +72,7 @@ Sounds.musicMeadow = new Sounds.sound("assets/audio/wandering.mp3");
 Sounds.musicAction = new Sounds.sound("assets/audio/action.mp3");
 Sounds.blood = new Sounds.sound("assets/audio/blood.mp3");
 Sounds.hoot = new Sounds.sound("assets/audio/owl_hoot.mp3");
+Sounds.bark = new Sounds.sound("assets/audio/angry_bark.mp3");
 
 Sounds.musicMeadow.onload(function(){
 	this.play(true);
