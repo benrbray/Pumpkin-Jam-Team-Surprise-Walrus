@@ -54,7 +54,7 @@ Sounds.sound = function(url){
 }
 
 Sounds.musicMeadow = new Sounds.sound("assets/audio/wandering.mp3");
-Sounds.blood = new Sounds.sound("assets/audio/blood2.mp3");
+Sounds.blood = new Sounds.sound("assets/audio/blood.mp3");
 
 Sounds.musicMeadow.onload(function(){
 	this.play(true);
