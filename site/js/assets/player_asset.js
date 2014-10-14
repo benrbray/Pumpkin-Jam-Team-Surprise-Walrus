@@ -7,14 +7,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 var tick = 0;
 // Player
-GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
+GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,player) {
 	context.save();
 	// Player Coordinates ------------------------------------------------------
 	
 	// Move origin to player center
 	context.translate(x,y);
-	asset.vel.x = obj.vx;
-	asset.vel.y = obj.vy;
+	asset.vel.x = player.vx;
+	asset.vel.y = player.vy;
 	
 	// Move Trailing Segments --------------------------------------------------
 	
@@ -39,7 +39,7 @@ GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 		
 		var offset = 0;
 		if(i==3){
-			offset = Math.sin(tick*Math.sin(tick/200)/20)/3;
+			offset = Math.sin(tick*Math.sin(tick/200)/30)/3;
 			tick++;
 		}
 		
@@ -56,7 +56,7 @@ GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 		context.restore();
 	}
 	
-	// Move Head ---------------------------------------------------------------
+	// Move Head (needs to draw on top) ----------------------------------------
 	
 	// First Segment
 	var headSegment = asset.segments[0];
@@ -64,6 +64,8 @@ GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 	// If player is moving, rotate head in direction of velocity
 	if(asset.vel.mag() > 0.03){
 		headSegment.dir = headSegment.dir.rotateTowards2(asset.vel, 1/10);
+		player.drawx = headSegment.dir.x;
+		player.drawy = headSegment.dir.y;
 	}
 	
 	// Draw first segment
