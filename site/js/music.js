@@ -13,14 +13,14 @@ function updateMusic() {
 			);
 		}
 	}
-	if (mindist < 7) {
+	if (mindist < 14) {
 		// Apply action
 		updateMusic.action += 1/180;
 	} else {
 		updateMusic.action -= 1/180;
 	}
 	updateMusic.action = Math.max(0,Math.min(updateMusic.action,1));
-	Sounds.musicMeadow.setVolume( 1-updateMusic.action );
-	Sounds.musicAction.setVolume( updateMusic.action );
+	Sounds.musicMeadow.setVolume( (1-updateMusic.action) * 0.2 );
+	Sounds.musicAction.setVolume( (updateMusic.action) * 0.2 );
 }
 updateMusic.action = 0;
