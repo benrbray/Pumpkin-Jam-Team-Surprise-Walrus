@@ -80,20 +80,36 @@ function playerThink(player) {
 			player.unspaced = false;
 			Sounds.blood.play(false);
 			player.attacks--;
+			
+			// Blood effect
 			for (var count = 0; count < 10; count++) {
 				new Particle(
 					player.x,player.y,
 					0.1 + Math.random() * 0.2,
 					Math.random() * 150 + 50,0,0,
-					30
+					30,
+					Particle.getBlood()
 				);
-				// Blood effect
 			}
+			
+			// Target successfully killed
 			if (player.attacks == 0) {
+				// heal player
 				player.health = Math.min( 9, player.health + 1 );
+				// accumulate stats
 				if (player.attacktarget.human) Stat.humans++;
 				else Stat.animals++;
+				// kill animal
 				player.attacktarget.die();
+				// blood splatter
+				var splatter = new GameObject(
+					player.attacktarget.x-player.attacktarget.gameAsset.width/2,
+					player.attacktarget.y-player.attacktarget.gameAsset.height/2,
+					GameAsset.getSplatter()
+				);
+				splatter.depth = -1;
+				GameObject.add(splatter);
+				GameObject.fixDepth();
 			}
 		}
 	}

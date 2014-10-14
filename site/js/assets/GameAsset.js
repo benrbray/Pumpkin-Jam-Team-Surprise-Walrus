@@ -90,3 +90,16 @@ GameAsset.ihouse1 = new Image();
 GameAsset.ihouse1.src = "assets/graphics/houseiconhalf.png";
 GameAsset.ihouse2 = new Image();
 GameAsset.ihouse2.src = "assets/graphics/houseiconlit.png";
+
+// Blood Splatters -------------------------------------------------------------
+
+GameAsset.splatters = [
+	new GameAsset(1.5, 1.5,true,"assets/graphics/particles/blood_large1.png"),
+	new GameAsset(1.5, 1.5,true,"assets/graphics/particles/blood_large2.png"),
+	new GameAsset(1.5, 1.5,true,"assets/graphics/particles/blood_large3.png"),
+	new GameAsset(1.5, 1.5,true,"assets/graphics/particles/blood_large4.png")
+];
+
+GameAsset.getSplatter = function(){
+	return GameAsset.splatters[(Math.random()*GameAsset.splatters.length)<<0];
+}
