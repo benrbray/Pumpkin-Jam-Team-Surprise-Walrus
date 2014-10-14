@@ -78,12 +78,14 @@ function drawVignette(){
 }
 
 function drawInfoBar(){
-	// 
-	context.fillStyle = "#000000";
-	context.font = "bold 16px 'Trebuchet MS'"
-	context.textAlign = "center";
-	context.textBaseline = "middle";
-	context.fillText("Health: " + World.player.health,WINDOW_WIDTH/2,16);
+	for (var i = 0; i < 9; i++) {
+		if (World.player.health > i) {
+			context.fillStyle = "rgba(240,50,60,0.75)";
+		} else {
+			context.fillStyle = "rgba(0,0,0,0.75)";
+		}
+		context.fillRect(i * 18+10.5,10.5,16,30);
+	}
 }
 
 //// Cursor --------------------------------------------------------------------
