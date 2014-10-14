@@ -149,7 +149,7 @@ World.move = function(x,y , r, vx,vy) {
 World.addPlayer = function(x, y){
 	World.player = GameObject.add(new GameObject(x, y, GameAsset.player, playerThink));
 	World.player.health = 9;
-	World.player.depth = 1;
+	World.player.depth = -2;
 }
 
 World.addTree = function(x, y){

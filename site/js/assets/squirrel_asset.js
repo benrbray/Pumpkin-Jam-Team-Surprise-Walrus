@@ -25,11 +25,11 @@ GameAsset.squirrel = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 	// So rotate in the right direction
 	context.rotate( Math.atan2(  obj.drawy, obj.drawx ) + Math.PI / 2 );
 	// Draw the wolf
-	context.drawImage(asset.img,-.4,-.4, 0.8, .8);
+	context.drawImage(asset.img,-.4,-.4 * 1.4, 0.8, .8 * 1.4);
 	// Put the context like it was before
 	context.restore();
 });
 
 // Create HTML Img element:
 GameAsset.squirrel.img = new Image();
-GameAsset.squirrel.img.src = "assets/graphics/squirrel.png";
+GameAsset.squirrel.img.src = "assets/graphics/Bunny1.png";
