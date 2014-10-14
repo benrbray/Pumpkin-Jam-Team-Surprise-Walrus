@@ -17,11 +17,14 @@ function draw() {
 	GameObject.drawAll();
 	
 	Particle.drawParticles();
+
+	context.fillStyle = "rgba(255,255,0,0.25)";
+	Light.drawAll(context);
 	
 	// Reset Canvas Coordinates for drawing GUI
 	context.setTransform(1,0,0,1,0,0);
 
-	drawLighting();
+	//drawLighting();
 
 	context.lineWidth = 1;
 	context.strokeStyle = "rgba(0,0,0,0.5)";

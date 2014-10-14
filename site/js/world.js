@@ -60,6 +60,15 @@ World.hasSpace = function(x,y,r) {
 }
 
 World.isLit = function(x,y) {
+	for (var i = 0; i < Light.lights.length; i++) {
+		var light = Light.lights[i];
+		var a = light.gameObject.x;
+		var b = light.gameObject.y;
+		var dist = distance(x,y, a,b);
+		if ( dist < light.radius) {
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -148,5 +157,15 @@ World.addTree = function(x, y){
 }
 
 World.addHuman = function(x,y){
-	GameObject.add(new GameObject(x, y, GameAsset.player, humanThink));
+	var hu = new GameObject(x, y, GameAsset.humanPlain, humanThink);
+	new Light(hu, 2, 0.5, 200, 200, 100);
+	GameObject.add(hu);
+}
+
+World.addAnimal = function(x,y) {
+	var an;
+	if (Math.random() < 1) {
+		an = new GameObject(x,y,GameAsset.squirrel, squirrelThink);
+	}
+	GameObject.add(an);
 }

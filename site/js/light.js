@@ -59,7 +59,17 @@ Light.prototype.drawLight = function(ctx, layer){
 	ctx.fillEllipse(rx, ry, rw, rh);
 }
 
-
+Light.remove = function(obj) {
+	if (Light.lights.indexOf(obj) >= 0) {
+		Light.lights.splice(Light.lights.indexOf(obj),1);
+	}
+	for (var i = 0; i < Light.lights.length; i++) {
+		if (Light.lights[i].gameObject === obj) {
+			Light.lights.splice(i,1);
+			i--;
+		}
+	}
+}
 
 
 
@@ -78,6 +88,7 @@ for (var k = 0; k < 3; k++) {
 }
 
 function drawLighting() {
+
 	var ctxs = [];
 	// Go over 3 canvases
 	for (var i = 0; i < lightingCanvases.length; i++) {
@@ -116,6 +127,17 @@ function drawLighting() {
 
 // Multiplies context `other` onto context `onto`
 function contextmultiply(onto,other) {
+	onto.save();
+	onto.setTransform(1,0,0,1,0,0);
+	onto.fillStyle = "rgba(0,0,0,0.25)";
+	onto.fillRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
+	onto.restore();
+	onto.globalCompositeOperation = "lighter";
+	onto.globalAlpha = 0.5;
+	onto.drawImage(lightingCanvases[0],0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
+	onto.globalCompositeOperation = "source-over";
+	onto.globalAlpha = 1;
+	/*
 	var edit = onto.getImageData(0,0, WINDOW_WIDTH,WINDOW_HEIGHT);
 	var mult = other.getImageData(0,0,WINDOW_WIDTH / 2,WINDOW_HEIGHT / 2);
 	// Image data (bitmap arrays) for each context
@@ -134,4 +156,5 @@ function contextmultiply(onto,other) {
 
 	// Writes data to `onto`
 	onto.putImageData(edit,0,0);
+	*/
 }

@@ -47,17 +47,29 @@ GameObject.prototype.update = function(){
 	}
 
 	// Do physics
-	var m = World.move(this.x, this.y,0.4, this.vx, this.vy);
-	this.x = m[0];
-	this.y = m[1];
-	this.vx *= m[2];
-	this.vy *= m[3];
+	if (!World.hasSpace(this.x,this.y,0.35)) {
+		// In case we get stuck in a wall...
+		this.x += this.vx;
+		this.y += this.vy;
+	} else {
+		var m = World.move(this.x, this.y,0.35, this.vx, this.vy);
+		this.x = m[0];
+		this.y = m[1];
+		this.vx *= m[2];
+		this.vy *= m[3];
+	}
 }
 
 GameObject.prototype.die = function() {
 	var where = GameObject.gameObjects.indexOf(this);
 	if (where >= 0) {
 		GameObject.gameObjects.splice(where,1);
+	}
+	for (var i = 0; i < Light.lights.length; i++) {
+		if (Light.lights[i].gameObject === this) {
+			Light.lights.splice(i,1);
+			return;
+		}
 	}
 }
 

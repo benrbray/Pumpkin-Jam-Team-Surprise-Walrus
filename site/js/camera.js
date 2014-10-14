@@ -39,7 +39,7 @@ Camera.contains = function(x, y){
 	var ysep = Camera.y - y;
 	var maxx = Camera.getHalfWidth(); // Maximum magnitudes
 	var maxy = Camera.getHalfHeight();
-	return Math.abs(xsep) < maxx + 2 && Math.abs(ysep) < maxy + 2;
+	return Math.abs(xsep) < maxx + 4 && Math.abs(ysep) < maxy + 4;
 }
 
 /* CAMERA.TRANSFORM

@@ -6,6 +6,8 @@ function GridObject(xTile, yTile, gameAsset){
 	// Instance Variables ------------------------------------------------------
 	this.xTile = xTile;
 	this.yTile = yTile;	
+	this.x = xTile;
+	this.y = yTile;
 	this.gameAsset = gameAsset;
 	
 	// Management --------------------------------------------------------------

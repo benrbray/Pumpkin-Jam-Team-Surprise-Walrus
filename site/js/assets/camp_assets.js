@@ -8,4 +8,4 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // Cabin
-GameAsset.cabin = new GameAsset(4, 3, false);
+GameAsset.cabin = new GameAsset(3,3, false, "assets/graphics/cabin1.png");
