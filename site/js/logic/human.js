@@ -105,16 +105,29 @@ function humanThink(h) {
 				}
 				if (threatDistance < range) {
 					// And facing correct way
-					var fx = h.drawx;
-					var fy = h.drawy;
-					if (anglebetween(fx,fy, nearestThreat.x,nearestThreat.y) <= 1.2) {
+					if (anglebetween(
+							h.drawx,h.drawy, nearestThreat.x - h.x,nearestThreat.y - h.y
+						) <= 1) {
 						// Can see
-						// Prepare to fire.
-						if (h.firing <= 0) {
-							h.firing = 25;
-						}
 						canSee = true;
 					}
+				}
+				if (threatDistance < 3.5) {
+					// Can see by virtue of being close
+					canSee = true;
+				}
+			}
+			if (canSee) {
+				var dx = nearestThreat.x - h.x;
+				var dy = nearestThreat.y - h.y;
+				var dm = magnitude(dx,dy);
+				dx /= dm;
+				dy /= dm;
+				h.drawx = h.drawx * 0.99 + 0.01 * dx;
+				h.drawy = h.drawy * 0.99 + 0.01 * dy;
+				if (h.firing <= 0 &&
+						anglebetween(dx,dy, h.drawx,h.drawy) <= 0.3) {
+					h.firing = 25;
 				}
 			}
 			if (h.firing > 0) {
@@ -127,7 +140,8 @@ function humanThink(h) {
 						// FIRE
 						for (var k = 0; k < 10; k++) {
 							var p = new Particle(
-								h.x + fx * 2, h.y + fy * 2,
+								h.x + h.drawx / magnitude(h.drawx,h.drawy) * 2,
+								h.y + h.drawy / magnitude(h.drawx,h.drawy) * 2,
 								Math.random() * 0.3,
 								255,255,255,
 								30

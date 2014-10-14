@@ -88,7 +88,7 @@ function playerThink(player) {
 					// Close enough to smack each other
 					player.attacks = obj.hits;
 					player.attacktarget = obj;
-					obj.reload = 60;
+					obj.reload = 95;
 					// They have 1 second before being able to attack you
 					Light.remove(obj);
 					break;

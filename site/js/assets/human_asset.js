@@ -31,12 +31,6 @@ GameAsset.humanPlain = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 
 	// Put the context like it was before
 	context.restore();
-
-	if (obj.glaring) {
-		//context.moveTo(obj.x,obj.y);
-		//context.lineTo(World.player.x,World.player.y);
-		//context.stroke();
-	}
 });
 
 // Create HTML Img element:
@@ -67,12 +61,6 @@ GameAsset.humanGun = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 
 	// Put the context like it was before
 	context.restore();
-
-	if (obj.glaring) {
-		context.moveTo(obj.x,obj.y);
-		context.lineTo(World.player.x,World.player.y);
-		context.stroke();
-	}
 });
 
 // Create HTML Img element:
