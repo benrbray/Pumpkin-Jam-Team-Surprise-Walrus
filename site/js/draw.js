@@ -10,9 +10,20 @@ function draw() {
 	// Transform canvas drawing coordinates to location/size of camera
 	context.setTransform(1,0,0,1,0,0);
 	context.clearRect(0,0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	
 	// Establish a zoom level based on Camera desired width
 	Camera.transform(context);
+
+	var cornerx = Math.floor((Camera.x - Camera.getHalfWidth()) / 8) * 8;
+	var cornery = Math.floor((Camera.y - Camera.getHalfHeight()) / 8) * 8;
+	for (var x = 0; x < 3; x++) {
+		for (var y = 0; y < 3; y++) {
+			context.drawImage(
+				GameAsset.grassImg,
+				cornerx + 8 * x,
+				cornery + 8 * y,
+				8,8);
+		}
+	}
 	
 	// Draw World
 	GridObject.drawAll();
@@ -22,14 +33,14 @@ function draw() {
 	
 	// Draw Lights
 	context.fillStyle = "rgba(255,255,0,0.25)"; // light color
-	Light.drawAll(context);
+	//Light.drawAll(context);
 	
 	// Reset Canvas Coordinates for drawing GUI
 	context.setTransform(1,0,0,1,0,0);
 	
 	// Screen Coordinates ------------------------------------------------------
 	
-	//drawLighting(); expensive way
+	drawLighting(); //expensive way
 	
 	drawGUI();
 	drawCursor();

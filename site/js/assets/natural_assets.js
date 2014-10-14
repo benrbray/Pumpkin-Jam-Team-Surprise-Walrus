@@ -43,3 +43,6 @@ GameAsset.treeBody = new GameAsset(3,3, true, function(x,y,asset,obj){
 });
 GameAsset.treeBody.img = new Image();
 GameAsset.treeBody.img.src = "assets/graphics/tree1.png";
+
+GameAsset.grassImg = new Image();
+GameAsset.grassImg.src = "assets/graphics/grass.png";
