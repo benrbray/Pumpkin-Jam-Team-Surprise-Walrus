@@ -125,6 +125,7 @@ function contextmultiply(onto,other) {
 	onto.globalAlpha = 0.5;
 	onto.drawImage(lightingCanvases[0],0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
 	onto.globalCompositeOperation = "source-over";
+	onto.globalAlpha = 1;
 	/*
 	var edit = onto.getImageData(0,0, WINDOW_WIDTH,WINDOW_HEIGHT);
 	var mult = other.getImageData(0,0,WINDOW_WIDTH / 2,WINDOW_HEIGHT / 2);
