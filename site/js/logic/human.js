@@ -9,7 +9,7 @@ function nearestWolf(x,y) {
 			m.push(GameObject.gameObjects[i]);
 		}
 	}
-	return m[0];//{x:m[0].x,y:m[0].y};
+	return m[0] || World.player;//{x:m[0].x,y:m[0].y};
 }
 
 function humanThink(h) {

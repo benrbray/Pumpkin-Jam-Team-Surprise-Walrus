@@ -15,6 +15,7 @@ function gameInit(){
 	Stat.lunges = 0;
 	var level = Levels[0];
 	level.init();
+	GameObject.fixDepth();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

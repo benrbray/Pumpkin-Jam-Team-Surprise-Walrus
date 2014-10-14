@@ -20,6 +20,7 @@ function GameObject(x, y, gameAsset, brain){
 	this.friction = 0.02;
 	this.gameAsset = gameAsset;
 	this.brain = brain;
+	this.depth = 0;
 }
 
 GameObject.prototype.draw = function(){
@@ -84,6 +85,12 @@ GameObject.add = function(gameObject){
 	assert( GameObject.gameObjects.indexOf(gameObject) === -1 , "Object " + gameObject + " already inserted to game objects");
 	GameObject.gameObjects.push(gameObject);
 	return gameObject;
+}
+
+GameObject.fixDepth = function() {
+	GameObject.gameObjects.sort(function(a,b) {
+		return b.depth - a.depth;
+	});
 }
 
 // Updates all staged GameObjects
