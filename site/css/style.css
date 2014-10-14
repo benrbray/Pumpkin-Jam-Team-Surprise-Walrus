@@ -122,11 +122,13 @@ a.button{
 	padding:1em;
 	border:1px solid #000;
 	box-shadow:0 0 20px 1px black;
+	text-align:justify;
 }
 
 .aside {
 	float:right;
-	width:200px;
+	width:300px;
 	border-left:1px solid black;
 	padding-left:0.75em;
+	margin-left:2em;
 }
