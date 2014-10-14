@@ -90,6 +90,7 @@ function humanThink(h) {
 		}
 
 		if (h.armed) {
+			// An armed (with gun?) human
 			if (World.visible(h.x,h.y, nearestThreat.x,nearestThreat.y)) {
 				var range = 4.5;
 				if (World.isLit(nearestThreat.x,nearestThreat.y)) {

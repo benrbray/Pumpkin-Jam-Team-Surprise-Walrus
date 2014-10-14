@@ -154,5 +154,7 @@ World.addTree = function(x, y){
 }
 
 World.addHuman = function(x,y){
-	GameObject.add(new GameObject(x, y, GameAsset.player, humanThink));
+	var hu = new GameObject(x, y, GameAsset.humanPlain, humanThink);
+	new Light(hu, 2, 0.5, 200, 200, 100);
+	GameObject.add(hu);
 }
