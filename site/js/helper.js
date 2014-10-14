@@ -1,5 +1,20 @@
 "use strict";
 
+
+//// CONSTANTS /////////////////////////////////////////////////////////////////
+
+var WINDOW_WIDTH = 800;
+var WINDOW_HEIGHT = 600;
+
+////////////////////////////////////////////////////////////////////////////////
+
+function canvas() {
+	var c = document.createElement("canvas");
+	c.width = WINDOW_WIDTH;
+	c.height = WINDOW_HEIGHT;
+	return c;
+}
+
 function sign(x) {
 	return x?x<0?-1:1:0;
 }
