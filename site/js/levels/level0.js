@@ -6,7 +6,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Levels[0] = new Level("Test Level", function(){
+Levels[0] = new Level("Test Level", function(level){
+
+	//level.staticRegions.push(new GridRegion(x,y,w,h));
+	
 	// Camp Setup
 	var cabin = new GridObject(2,2, GameAsset.cabin);
 	new Light({x:4,y:4}, 6, 0.5, 200, 200, 100);
@@ -35,4 +38,5 @@ Levels[0] = new Level("Test Level", function(){
 	World.addHuman(-8,33,false);
 	World.addHuman(-10,33,false);
 	new GridObject(-12,26, GameAsset.tent);
+
 });
