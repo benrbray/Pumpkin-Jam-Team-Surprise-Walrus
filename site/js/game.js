@@ -6,7 +6,10 @@
 
 var Stat = {};
 
+var isGameOver = false;
+
 function gameInit(){
+	isGameOver = false;
 	Stat.animals = 0;
 	Stat.humans = 0;
 	Stat.steps = 0;
@@ -23,6 +26,7 @@ function gameRestart() {
 }
 
 function gameOver() {
+	isGameOver = true;
 	document.getElementById('killnum').innerHTML = Stat.animals + Stat.humans;
 	document.getElementById('killnum_human').innerHTML = Stat.humans;
 	document.getElementById('killnum_animals').innerHTML = Stat.animals;
@@ -62,7 +66,7 @@ function gameUpdate(){
 	Mouse.worldy = world[1];
 
 
-	if (World.player.health <= 0) {
+	if (World.player.health <= 0 && !isGameOver) {
 		// GAME OVER
 		gameOver();
 	}
