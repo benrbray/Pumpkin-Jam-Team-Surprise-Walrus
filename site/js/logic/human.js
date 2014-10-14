@@ -107,7 +107,7 @@ function humanThink(h) {
 					// And facing correct way
 					var fx = h.drawx;
 					var fy = h.drawy;
-					if (anglebetween(fx,fy, nearestThreat.x,nearestThreat.y) <= 0.7) {
+					if (anglebetween(fx,fy, nearestThreat.x,nearestThreat.y) <= 1.2) {
 						// Can see
 						// Prepare to fire.
 						if (h.firing <= 0) {
