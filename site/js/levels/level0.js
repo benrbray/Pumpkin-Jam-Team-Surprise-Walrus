@@ -63,4 +63,17 @@ Levels[0] = new Level("Test Level", function(level){
 	World.addHuman("Campfire",-18,-22,true);
 	World.addHuman("Campfire",-18,-18,true);
 	World.addHuman("Campfire",-22,-18,true);
+
+	// Houses
+	level.staticRegions.push( new GridRegion(40, 30, 7,7) );
+	new GridObject(40,30,GameAsset.cabin);
+	new GridObject(44,30,GameAsset.cabin);
+	new GridObject(48,34,GameAsset.cabin);
+	new Light({x:46,y:31},5);
+	World.addHuman("Houses",46,31,true);
+	World.addHuman("Houses",46,31,true);
+	World.addHuman("Houses",46,31,true);
+	World.addZombie("Houses",40,34.5);
+	World.addZombie("Houses",40,34.5);
+	World.addZombie("Houses",40,34.5);
 });
