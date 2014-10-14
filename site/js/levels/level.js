@@ -19,6 +19,7 @@ function Level(label, initFunction){
 	this.init = function(worldSize){
 		World.clear(worldSize || 100);
 		GameObject.clearAll();
+		GridObject.clearAll();
 		initFunction();
 		this.generateContent();
 	}

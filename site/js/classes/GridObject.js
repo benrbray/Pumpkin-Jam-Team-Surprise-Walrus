@@ -25,12 +25,12 @@ function GridObject(xTile, yTile, gameAsset){
 	
 	// Stage this object for drawing
 	GridObject.gridObjects.push(this);
- }
- 
- GridObject.prototype.draw = function(){
+}
+
+GridObject.prototype.draw = function(){
 	this.gameAsset.draw(this.xTile, this.yTile);
- }
- 
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // TODO:  GridObject.worldInit() adds and keeps track of all static objects
@@ -52,4 +52,8 @@ GridObject.drawAll = function(){
 		var obj = gridObjects[i];
 		obj.draw();
 	}
+}
+
+GridObject.clearAll = function() {
+	GridObject.gridObjects = [];
 }
