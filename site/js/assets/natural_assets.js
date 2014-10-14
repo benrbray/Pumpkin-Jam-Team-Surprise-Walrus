@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // Tree Trunk
-GameAsset.treeTrunk = new GameAsset(1,1, false, "wal.png");
+GameAsset.treeTrunk = new GameAsset(1,1, false, "assets/graphics/tree_trunk.png");
 // Tree Body
 GameAsset.treeBody = new GameAsset(3,3, true, function(x,y,asset,obj){
 	context.globalAlpha = 0.75;
