@@ -116,6 +116,16 @@ function drawLighting() {
 
 // Multiplies context `other` onto context `onto`
 function contextmultiply(onto,other) {
+	onto.save();
+	onto.setTransform(1,0,0,1,0,0);
+	onto.fillStyle = "rgba(0,0,0,0.25)";
+	onto.fillRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
+	onto.restore();
+	onto.globalCompositeOperation = "lighter";
+	onto.globalAlpha = 0.5;
+	onto.drawImage(lightingCanvases[0],0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
+	onto.globalCompositeOperation = "source-over";
+	/*
 	var edit = onto.getImageData(0,0, WINDOW_WIDTH,WINDOW_HEIGHT);
 	var mult = other.getImageData(0,0,WINDOW_WIDTH / 2,WINDOW_HEIGHT / 2);
 	// Image data (bitmap arrays) for each context
@@ -134,4 +144,5 @@ function contextmultiply(onto,other) {
 
 	// Writes data to `onto`
 	onto.putImageData(edit,0,0);
+	*/
 }
