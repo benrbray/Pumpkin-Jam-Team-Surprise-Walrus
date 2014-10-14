@@ -6,6 +6,18 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// Rock
+GameAsset.rock = new GameAsset(1,1, false, function(x,y,asset,obj){
+	context.save();
+	var randomRotation = (x + y * Math.E) % (Math.PI * 2);
+	context.translate(x + 0.5,y + 0.5);
+	context.rotate(randomRotation);
+	context.drawImage( GameAsset.rock.img, -0.5, -.5, 1, 1 );
+	context.restore();
+});
+GameAsset.rock.img = new Image();
+GameAsset.rock.img.src = "assets/graphics/rock.png";
+
 // Tree Trunk
 GameAsset.treeTrunk = new GameAsset(1,1, false, function(x,y,asset,obj){
 	context.save();

@@ -27,9 +27,9 @@ function Level(label, initFunction){
 Level.prototype.generateContent = function(){
 	// Generate Trees?
 	var numTrees = 200;
-	var density = numTrees / (World.size*World.size);
-	var animals = 0;
+	var treeDensity = numTrees / (World.size*World.size);
 	var animalDensity = 1 / 240;
+	var rockDensity = 1/100;
 	// Each grid cell has independent probability of containing tree
 	for(var x = Math.floor(-World.size/2); x < World.size/2; x++){
 		for(var y = Math.floor(-World.size/2); y < World.size; y++){
@@ -44,17 +44,20 @@ Level.prototype.generateContent = function(){
 			if(skip) break;
 			
 			// Add tree with probability
-			if(Math.random() < density) {
+			if(Math.random() < treeDensity) {
 				World.addTree(x,y);
 			} else {
 				if (Math.random() < animalDensity) {
 					World.addAnimal(x,y);
-					animals++;
+				} else {
+					if (Math.random() < rockDensity) {
+						new GridObject(x,y, GameAsset.rock);
+					}
 				}
 			}
 		}
 	}
 	// Generate Rocks?
-	
+
 	// Generate Paths?
 }
