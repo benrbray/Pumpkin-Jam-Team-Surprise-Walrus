@@ -46,8 +46,8 @@ Camera.contains = function(x, y){
  * Transforms the given context to reflect the viewing angle specified by
  * camera.
  */
-Camera.transform = function(ctx) {
-	var scale = 1/Camera.getScale();
+Camera.transform = function(ctx , winx) {
+	var scale = (winx || WINDOW_WIDTH) / Camera.width;
 	ctx.scale(scale, scale);
 	
 	// Center camera on screen
