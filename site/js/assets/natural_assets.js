@@ -10,6 +10,14 @@
 GameAsset.treeTrunk = new GameAsset(1,1, false, "wal.png");
 // Tree Body
 GameAsset.treeBody = new GameAsset(3,3, true, function(x,y,asset,obj){
-	context.fillStyle = "rgba(255,255,255,0.5)";
-	context.fillCircle(x, y, 2);
+	context.globalAlpha = 0.75;
+	context.save();
+	obj.randomRotation = obj.randomRotation || (Math.random() * Math.PI * 2);
+	context.translate(x,y);
+	context.rotate(obj.randomRotation);
+	context.drawImage( GameAsset.treeBody.img, -2.5, -2.5, 5, 5 );
+	context.restore();
+	context.globalAlpha = 1;
 });
+GameAsset.treeBody.img = new Image();
+GameAsset.treeBody.img.src = "assets/graphics/tree1.png";
