@@ -16,7 +16,7 @@ GameAsset.rock = new GameAsset(1,1, false, function(x,y,asset,obj){
 	context.restore();
 });
 GameAsset.rock.img = new Image();
-GameAsset.rock.img.src = "assets/graphics/rock.png";
+GameAsset.rock.img.src = "assets/graphics/rock2.png";
 
 // Tree Trunk
 GameAsset.treeTrunk = new GameAsset(1,1, false, function(x,y,asset,obj){
