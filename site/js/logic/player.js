@@ -58,12 +58,19 @@ function playerThink(player) {
 		}
 		if (Keyboard.SPACE && player.unspaced) {
 			player.unspaced = false;
+			Sounds.blood.play(false);
 			player.attacks--;
 			for (var count = 0; count < 10; count++) {
-				new Particle(player.x,player.y, 0.1 + Math.random() * 0.2, Math.random() * 150 + 50,0,0, 30);
+				new Particle(
+					player.x,player.y,
+					0.1 + Math.random() * 0.2,
+					Math.random() * 150 + 50,0,0,
+					30
+				);
 				// Blood effect
 			}
 			if (player.attacks == 0) {
+				player.health = Math.min( 9, player.health + 1 );
 				player.attacktarget.die();
 			}
 		}
@@ -81,6 +88,8 @@ function playerThink(player) {
 					// Close enough to smack each other
 					player.attacks = obj.hits;
 					player.attacktarget = obj;
+					obj.reload = 60;
+					// They have 1 second before being able to attack you
 					Light.remove(obj);
 					break;
 				}

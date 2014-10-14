@@ -9,7 +9,7 @@ function nearestWolf(x,y) {
 			m.push(GameObject.gameObjects[i]);
 		}
 	}
-	return {x:m[0].x,y:m[0].y};
+	return m[0];//{x:m[0].x,y:m[0].y};
 }
 
 function humanThink(h) {
@@ -27,6 +27,7 @@ function humanThink(h) {
 		h.meat = true;
 		h.human = true;
 		h.armed = true;//Math.random() < 0.4;
+		h.reload = 0;
 		h.firing = 0;
 		h.hits = 6;
 	}
@@ -87,14 +88,17 @@ function humanThink(h) {
 
 		var threatDistance = distance(h.x,h.y, nearestThreat.x,nearestThreat.y);
 		if ( threatDistance < 5 ) {
-			// Apprehensive
-			h.fear += 1/60/15; // approximately 2 min for panic
+			// Apprehensive?
+			h.fear += 1/60/15 * 5; // approximately 24 sec for panic
 		}
+		h.reload--;
 		h.glaring = false;
-		if (h.armed) {
+		if (h.armed && h.reload <= 0) {
+			var canSee = false;
+			var range = 2.4;
 			// An armed (with gun?) human
 			if (World.visible(h.x,h.y, nearestThreat.x,nearestThreat.y)) {
-				var range = 2.4;
+				range = 2.4;
 				if (World.isLit(nearestThreat.x,nearestThreat.y)) {
 					range = 4.5;
 				}
@@ -105,16 +109,36 @@ function humanThink(h) {
 					if (fx * (nearestThreat.x - h.x) + fy * (nearestThreat.y - h.y) >= 0) {
 						// Can see
 						// Prepare to fire.
-						h.firing = 15;
+						if (h.firing <= 0) {
+							h.firing = 25;
+						}
+						canSee = true;
 					}
 				}
 			}
-		}
-		if (h.firing > 0) {
-			h.wx = 0;
-			h.wy = 0;
-			h.glaring = true;
-			h.firing--;
+			if (h.firing > 0) {
+				h.wx = 0;
+				h.wy = 0;
+				h.glaring = true;
+				h.firing--;
+				if (h.firing == 1) {
+					if (canSee) {
+						// FIRE
+						for (var k = 0; k < 10; k++) {
+							var p = new Particle(
+								h.x + fx * 2, h.y + fy * 2,
+								Math.random() * 0.3,
+								255,255,255,
+								30
+							);
+							p.vx *= 3;
+							p.vy *= 3;
+						}
+						nearestThreat.health -= 4;
+						h.reload = 60;
+					}
+				}
+			}
 		}
 	}
 }

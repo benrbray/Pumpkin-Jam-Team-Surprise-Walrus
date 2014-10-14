@@ -24,6 +24,13 @@ function draw() {
 	// Reset Canvas Coordinates for drawing GUI
 	context.setTransform(1,0,0,1,0,0);
 
+	// GUI
+	context.fillStyle = "#EE2244";
+	context.font = "bold 16px 'Trebuchet MS'"
+	context.textAlign = "center";
+	context.textBaseline = "middle";
+	context.fillText("Health: " + World.player.health,WINDOW_WIDTH/2,16);
+
 	//drawLighting();
 
 	context.lineWidth = 1;

@@ -30,7 +30,7 @@ GameAsset.humanPlain = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 	context.rotate( Math.atan2(  obj.drawy, obj.drawx ) + Math.PI / 2 );
 
 	// Draw the wolf
-	context.drawImage(asset.img,-.4,-.4, 0.8, .8);
+	context.drawImage(asset.img,-.5,-.5, 1, 1);
 
 	// Put the context like it was before
 	context.restore();
