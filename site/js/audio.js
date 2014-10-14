@@ -1,6 +1,7 @@
 var Sounds = {};
 var loaded_sounds = 0;
 
+// Get audio data from remote server
 function getAudioData(url, obj, audioContext) {
 	var request = new XMLHttpRequest();
 	request.open("GET", url, true);
@@ -10,6 +11,8 @@ function getAudioData(url, obj, audioContext) {
 		loaded_sounds++;
 		audioContext.decodeAudioData(request.response, function(data) {
 				obj.data = data;
+
+				// Alert the audio object that the sound is loaded
 				obj.audioLoaded();
 			},
 			function() {
@@ -26,6 +29,9 @@ Sounds.sound = function(url){
 	this.audioContext = new AudioContext();
 	this.err = false;
 
+	// Volume Controller
+	this.gain = this.audioContext.createGain();
+	this.gain.connect(this.audioContext.destination);
 	this.loadCallback = null;
 
 	getAudioData(this.url, this, this.audioContext);
@@ -44,12 +50,21 @@ Sounds.sound = function(url){
 		this.source = this.audioContext.createBufferSource();
 		this.source.buffer = this.data;
 		this.source.loop = loop;
-		this.source.connect(this.audioContext.destination);
+		this.source.connect(this.gain);
 		this.source.start(0);
 	}
 
-	this.pause = function() {
+	this.stop = function() {
 		this.source.stop(0);
+	}
+
+	/**
+	 * Sounds.setVolume - Change volume of a sound
+	 *
+	 * @param decimal volume - the volume as a number between 0 and 1.
+	 */
+	this.setVolume = function(volume) {
+		this.gain.gain.value = volume;
 	}
 }
 
@@ -59,5 +74,3 @@ Sounds.blood = new Sounds.sound("assets/audio/blood.mp3");
 Sounds.musicMeadow.onload(function(){
 	this.play(true);
 });
-
-Sounds.blood.play(false);
