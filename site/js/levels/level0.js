@@ -26,6 +26,7 @@ Levels[0] = new Level("Test Level", function(level){
 	World.addHuman("Cabin",6,9,false);
 
 	// Tents Settlement
+	level.staticRegions.push( new GridRegion(-11,29, 5,5 ) );
 	new GridObject(-10,30, GameAsset.tent);
 	new GridObject(-11,34, GameAsset.tent);
 	new GridObject(-9,34, GameAsset.tent);
@@ -37,6 +38,7 @@ Levels[0] = new Level("Test Level", function(level){
 	new GridObject(-12,26, GameAsset.tent);
 
 	// Horde Settlement
+	level.staticRegions.push( new GridRegion(30,-30, 3,3 ) );
 	new GridObject(30, -30, GameAsset.tent);
 	new Light({x:31,y:-28},4,0.5,200,200,100);
 	World.addHuman("Horde",30,-30,true);
@@ -53,5 +55,12 @@ Levels[0] = new Level("Test Level", function(level){
 	World.addZombie("Horde",30,-25);
 	World.addZombie("Horde",30,-25);
 
-	
+	// Campfire
+	level.staticRegions.push( new GridRegion(-22,-22, 3,3 ) );
+	new GridObject(-20,-20,GameAsset.campfire);
+	new Light({x:-19.5,y:-19.5},7);
+	World.addHuman("Campfire",-22,-22,true);
+	World.addHuman("Campfire",-18,-22,true);
+	World.addHuman("Campfire",-18,-18,true);
+	World.addHuman("Campfire",-22,-18,true);
 });
