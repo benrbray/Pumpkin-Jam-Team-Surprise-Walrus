@@ -33,7 +33,11 @@ function GameAsset(width, height, walkGrid, drawFunction){
 	
 	// Use draw function if provided; otherwise treat as image and draw sprite
 	if(drawFunction instanceof Function) {
-		this.draw = function(x,y, obj){ drawFunction(x, y, this, obj); }
+		this.draw = function(x,y, obj){
+			if (Camera.contains(x,y)) {
+				drawFunction(x, y, this, obj);
+			} 
+		}
 	} else if (drawFunction) { // drawFunction is provided, treat as sprite
 		// Prepare Image instance for drawing sprite
 		var t = this;
@@ -43,12 +47,16 @@ function GameAsset(width, height, walkGrid, drawFunction){
 		
 		// Draw sprite
 		this.draw = function(x,y){
-			GameAsset.drawSprite(x, y, this);
+			if (Camera.contains(x,y)) {
+				GameAsset.drawSprite(x, y, this);
+			}
 		}
 	} else {
 		// Draw bounding box if no image / 
 		this.draw = function(x,y) { 
-			GameAsset.drawBox(x,y,this);
+			if (Camera.contains(x,y)) {
+				GameAsset.drawBox(x,y,this);
+			}
 		};
 	}
 }
@@ -61,7 +69,7 @@ GameAsset.drawBox = function(x, y, obj){
 }
 
 GameAsset.drawSprite = function(x, y, obj){
-	if (obj.imgready && Camera.contains(x,y)) {
+	if (obj.imgready) {
 		var halfWidth = 0;
 		var halfHeight = 0;
 		context.drawImage(
