@@ -12,6 +12,7 @@ function gameInit(){
 	isGameOver = false;
 	Stat.animals = 0;
 	Stat.humans = 0;
+	Stat.zombies = 0;
 	Stat.steps = 0;
 	Stat.lunges = 0;
 	var level = Levels[0];
@@ -19,11 +20,13 @@ function gameInit(){
 	GameObject.fixDepth();
 }
 
-function gameRestart() {
+function gameRestart(won) {
 	document.getElementById('gameoverlay').style.opacity = 0;
 
 	setTimeout(function(){
+		if(won) Sounds.win.stop();
 		document.getElementById('gameover').style.display = "none";
+		document.getElementById('gamewin').style.display = "none";
 		document.getElementById('gameoverlay').style.display = "none";
 		World.clear();
 		gameInit();
@@ -36,7 +39,29 @@ function gameOver() {
 	Sounds.musicMeadow.setVolume(0);
 	Sounds.musicAction.setVolume(0);
 	Sounds.lose.setVolume(.7);
-	Sounds.lose.play();
+	Sounds.lose.play(false);
+
+	document.getElementById('killnum').innerHTML = Stat.animals + Stat.humans;
+	document.getElementById('killnum_human').innerHTML = Stat.humans;
+	document.getElementById('killnum_animals').innerHTML = Stat.animals;
+	document.getElementById('killnum_zombies').innerHTML = Stat.zombies;
+
+	document.getElementById('lunge_count').innerHTML = Stat.lunges;
+	document.getElementById('steps_taken').innerHTML = Math.round(Stat.steps);
+
+	document.getElementById('gameover').style.display = "block";
+	document.getElementById('gameoverlay').style.display = "block";
+
+	setTimeout(function(){document.getElementById('gameoverlay').style.opacity = 1;}, 30);
+}
+
+function gameWin(){
+	isGameOver = true;
+
+	Sounds.musicMeadow.setVolume(0);
+	Sounds.musicAction.setVolume(0);
+	Sounds.win.setVolume(.7);
+	Sounds.win.play(true);
 
 	document.getElementById('killnum').innerHTML = Stat.animals + Stat.humans;
 	document.getElementById('killnum_human').innerHTML = Stat.humans;
@@ -45,7 +70,7 @@ function gameOver() {
 	document.getElementById('lunge_count').innerHTML = Stat.lunges;
 	document.getElementById('steps_taken').innerHTML = Math.round(Stat.steps);
 
-	document.getElementById('gameover').style.display = "block";
+	document.getElementById('gamewin').style.display = "block";
 	document.getElementById('gameoverlay').style.display = "block";
 
 	setTimeout(function(){document.getElementById('gameoverlay').style.opacity = 1;}, 30);

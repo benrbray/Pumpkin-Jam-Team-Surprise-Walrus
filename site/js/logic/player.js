@@ -91,9 +91,23 @@ function playerThink(player) {
 			}
 			if (player.attacks == 0) {
 				player.health = Math.min( 9, player.health + 1 );
-				if (player.attacktarget.human) Stat.humans++;
+				if (player.attacktarget.zombie) Stat.zombies++;
+				else if (player.attacktarget.human) Stat.humans++;
 				else Stat.animals++;
+
 				player.attacktarget.die();
+
+				var enemies = 0;
+				// Check if all enemies are killed
+				for (var i = 0; i < World.settlements.length; i++) {
+					for (var j = 0; j < GameObject.gameObjects.length; j++) {
+						if (GameObject.gameObjects[j].settlement == World.settlements[i]) {
+							enemies++;
+						}
+					}
+				}
+
+				if (enemies == 0) gameWin();
 			}
 		}
 	}
