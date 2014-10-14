@@ -19,7 +19,7 @@ World.clear = function(size) {
 	World.size = size;
 	World.player = null;
 	World.tick = 0;
-	
+	Light.lights = [];
 	// Initialize World grid to be entirely walkable
 	for (var i = Math.floor(-World.size / 2); i < (World.size / 2); i++) {
 		World.grid[i] = [];
@@ -28,7 +28,7 @@ World.clear = function(size) {
 		}
 	}
 }
-World.clear(128);
+//World.clear(128);
 
 //// GEOMETRY //////////////////////////////////////////////////////////////////
 
