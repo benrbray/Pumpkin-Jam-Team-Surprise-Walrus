@@ -22,12 +22,12 @@ GameAsset.humanPlain = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 		}
 	}
 
-	// We're centered on the player's center
+	// We're centered on the human's center
 	// So rotate in the right direction
 	context.rotate( Math.atan2(  obj.drawy, obj.drawx ) + Math.PI / 2 );
 
-	// Draw the wolf
-	context.drawImage(asset.img,-.5,-.5, 1, 1);
+	// Draw the human
+	context.drawImage(asset.img,-.65,-.65, 1.3, 1.3);
 
 	// Put the context like it was before
 	context.restore();
@@ -57,7 +57,7 @@ GameAsset.humanGun = new GameAsset(0.8, 0.8, true, function(x,y,asset,obj) {
 	context.rotate( Math.atan2(  obj.drawy, obj.drawx ) + Math.PI / 2 );
 
 	// Draw the wolf
-	context.drawImage(asset.img,-.5,-.5, 1, 1);
+	context.drawImage(asset.img,-.65,-.65, 1.3, 1.3);
 
 	// Put the context like it was before
 	context.restore();
