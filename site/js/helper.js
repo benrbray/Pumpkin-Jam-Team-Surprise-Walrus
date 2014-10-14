@@ -59,6 +59,14 @@ function gridOfSize(w, h, val){
 	return grid;
 }
 
+function dot(a,b,x,y) {
+	return a * x + b * y;
+}
+
+function anglebetween(a,b,x,y) {
+	return Math.acos( dot(a,b,x,y) / (magnitude(a,b) * magnitude(x,y)) );
+}
+
 //// Drawing -------------------------------------------------------------------
 
 CanvasRenderingContext2D.prototype.fillCircle = function(x,y,radius){
