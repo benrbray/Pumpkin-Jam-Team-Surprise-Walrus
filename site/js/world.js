@@ -65,7 +65,6 @@ World.isLit = function(x,y) {
 		var a = light.gameObject.x;
 		var b = light.gameObject.y;
 		var dist = distance(x,y, a,b);
-		console.log(dist,light.radius);
 		if ( dist < light.radius) {
 			return true;
 		}
@@ -161,4 +160,12 @@ World.addHuman = function(x,y){
 	var hu = new GameObject(x, y, GameAsset.humanPlain, humanThink);
 	new Light(hu, 2, 0.5, 200, 200, 100);
 	GameObject.add(hu);
+}
+
+World.addAnimal = function(x,y) {
+	var an;
+	if (Math.random() < 1) {
+		an = new GameObject(x,y,GameAsset.squirrel, squirrelThink);
+	}
+	GameObject.add(an);
 }

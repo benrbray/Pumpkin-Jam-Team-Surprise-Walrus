@@ -76,10 +76,10 @@ function playerThink(player) {
 		player.vy = player.leapy * 0.3;
 		for (var i = 0; i < GameObject.gameObjects.length; i++) {
 			var obj = GameObject.gameObjects[i];
-			if (obj.human) {
-				if (distance(obj.x,obj.y,player.x,player.y) < 1) {
+			if (obj.meat) {
+				if (distance(obj.x,obj.y,player.x,player.y) < 0.5) {
 					// Close enough to smack each other
-					player.attacks = 6;
+					player.attacks = obj.hits;
 					player.attacktarget = obj;
 					Light.remove(obj);
 					break;

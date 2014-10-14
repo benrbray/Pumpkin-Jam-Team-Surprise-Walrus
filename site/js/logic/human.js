@@ -24,9 +24,11 @@ function humanThink(h) {
 		h.homey = h.y;
 		h.maxSpeed = .02;
 		h.friction = 0.01;
+		h.meat = true;
 		h.human = true;
 		h.armed = true;//Math.random() < 0.4;
 		h.firing = 0;
+		h.hits = 6;
 	}
 	// Human Properties
 	/*
