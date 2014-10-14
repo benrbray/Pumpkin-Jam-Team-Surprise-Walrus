@@ -9,6 +9,7 @@
 Levels[0] = new Level("Test Level", function(){
 	// Camp Setup
 	var cabin = new GridObject(2,2, GameAsset.cabin);
+	new Light(cabin, 6, 0.5, 200, 200, 100);
 	
 	// Define Player
 	World.addPlayer(-20,-20);

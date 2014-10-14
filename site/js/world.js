@@ -62,7 +62,11 @@ World.hasSpace = function(x,y,r) {
 World.isLit = function(x,y) {
 	for (var i = 0; i < Light.lights.length; i++) {
 		var light = Light.lights[i];
-		if (distance(x,y, light.x,light.y) < light.radius) {
+		var a = light.gameObject.x;
+		var b = light.gameObject.y;
+		var dist = distance(x,y, a,b);
+		console.log(dist,light.radius);
+		if ( dist < light.radius) {
 			return true;
 		}
 	}

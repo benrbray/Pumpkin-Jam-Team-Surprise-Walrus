@@ -59,7 +59,17 @@ Light.prototype.drawLight = function(ctx, layer){
 	ctx.fillEllipse(rx, ry, rw, rh);
 }
 
-
+Light.remove = function(obj) {
+	if (Light.lights.indexOf(obj) >= 0) {
+		Light.lights.splice(Light.lights.indexOf(obj),1);
+	}
+	for (var i = 0; i < Light.lights.length; i++) {
+		if (Light.lights[i].gameObject === obj) {
+			Light.lights.splice(i,1);
+			i--;
+		}
+	}
+}
 
 
 

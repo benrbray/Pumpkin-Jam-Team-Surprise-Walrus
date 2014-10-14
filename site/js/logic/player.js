@@ -81,6 +81,7 @@ function playerThink(player) {
 					// Close enough to smack each other
 					player.attacks = 6;
 					player.attacktarget = obj;
+					Light.remove(obj);
 					break;
 				}
 			}

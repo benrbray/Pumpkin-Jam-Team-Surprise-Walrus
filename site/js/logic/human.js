@@ -25,7 +25,7 @@ function humanThink(h) {
 		h.maxSpeed = .02;
 		h.friction = 0.01;
 		h.human = true;
-		h.armed = Math.random() < 0.4;
+		h.armed = true;//Math.random() < 0.4;
 		h.firing = 0;
 	}
 	// Human Properties
@@ -88,13 +88,13 @@ function humanThink(h) {
 			// Apprehensive
 			h.fear += 1/60/15; // approximately 2 min for panic
 		}
-
+		h.glaring = false;
 		if (h.armed) {
 			// An armed (with gun?) human
 			if (World.visible(h.x,h.y, nearestThreat.x,nearestThreat.y)) {
-				var range = 4.5;
+				var range = 2.4;
 				if (World.isLit(nearestThreat.x,nearestThreat.y)) {
-					range = 1.9;
+					range = 4.5;
 				}
 				if (threatDistance < range) {
 					// And facing correct way
@@ -111,6 +111,7 @@ function humanThink(h) {
 		if (h.firing > 0) {
 			h.wx = 0;
 			h.wy = 0;
+			h.glaring = true;
 			h.firing--;
 		}
 	}
