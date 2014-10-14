@@ -91,7 +91,6 @@ function playerThink(player) {
 			}
 			if (player.attacks == 0) {
 				player.health = Math.min( 9, player.health + 1 );
-				console.log(player.attacktarget);
 				if (player.attacktarget.human) Stat.humans++;
 				else Stat.animals++;
 				player.attacktarget.die();
