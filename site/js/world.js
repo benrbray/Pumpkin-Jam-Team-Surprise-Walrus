@@ -10,12 +10,15 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// Global Tick
+
 // Define World grid
 var World = {};
 World.clear = function(size) {
 	World.grid = [];
 	World.size = size;
 	World.player = null;
+	World.tick = 0;
 	
 	// Initialize World grid to be entirely walkable
 	for (var i = Math.floor(-World.size / 2); i < (World.size / 2); i++) {
