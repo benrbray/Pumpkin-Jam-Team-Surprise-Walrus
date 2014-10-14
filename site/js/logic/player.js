@@ -84,7 +84,7 @@ function playerThink(player) {
 		for (var i = 0; i < GameObject.gameObjects.length; i++) {
 			var obj = GameObject.gameObjects[i];
 			if (obj.meat) {
-				if (distance(obj.x,obj.y,player.x,player.y) < 0.5) {
+				if (distance(obj.x,obj.y,player.x,player.y) < 0.6) {
 					// Close enough to smack each other
 					player.attacks = obj.hits;
 					player.attacktarget = obj;
