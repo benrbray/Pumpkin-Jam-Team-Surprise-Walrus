@@ -14,7 +14,12 @@ GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,player) {
 	tick++;
 	// Time-Oscillating tail wag amplitude, increases with proximity to meat
 	var meatDist = meatProximity(player.x, player.y) + 1
-	var tailWag = Math.sin(tick/meatDist/4)/3;
+	var tailWag = Math.sin(tick/meatDist/12)/3;
+	
+	// Player speed
+	var playerSpeed =  magnitude(player.vx, player.vy);
+	var legAmplitude = Math.min(0.16, 2 * ( 2/(1+Math.exp(-playerSpeed)) - 1));
+	var legPhase = tick / 3;
 	
 	// Entering Player Coordinates ---------------------------------------------
 	
@@ -25,7 +30,33 @@ GameAsset.player = new GameAsset(0.8, 0.8, true, function(x,y,asset,player) {
 	
 	// Draw Feet ---------------------------------------------------------------
 	
+	// Store body segments
+	var frontBody = asset.segments[1];
+	var backBody = asset.segments[2];
 	
+	// Center origin on front body segment
+	context.save();
+		context.translate(frontBody.pos.x, frontBody.pos.y);
+		context.rotate(frontBody.dir.angle());
+		// Front Right
+		var fl_off = Math.sin( legPhase ) * legAmplitude;
+		context.drawImage(asset.frontRightImg, -0.35+fl_off, 0.15, 0.4, 0.25);
+		// Front Left
+		var fr_off = Math.sin( legPhase + Math.PI ) * legAmplitude;
+		context.drawImage(asset.frontLeftImg, -0.35+fr_off, -0.12, 0.4, -0.25);
+	context.restore();
+	
+	// Center origin on back body segment
+	context.save();
+		context.translate(backBody.pos.x, backBody.pos.y);
+		context.rotate(backBody.dir.angle());
+		// Back Right
+		var bl_off = Math.sin( legPhase + Math.PI / 2) * legAmplitude;
+		context.drawImage(asset.backRightImg, -0.35+bl_off, 0.15, 0.4, 0.25);
+		// Back Left
+		var br_off = Math.sin( legPhase + 3 * Math.PI / 2 ) * legAmplitude;
+		context.drawImage(asset.backLeftImg, -0.35+br_off, -0.12, 0.4, -0.25);
+	context.restore();
 	
 	// Move Trailing Segments --------------------------------------------------
 	
@@ -99,6 +130,14 @@ GameAsset.player.behindImg = new Image();
 GameAsset.player.behindImg.src = "assets/graphics/wolf/wolf-behind.png";
 GameAsset.player.tailImg = new Image();
 GameAsset.player.tailImg.src = "assets/graphics/wolf/wolf-tail.png";
+GameAsset.player.frontLeftImg = new Image();
+GameAsset.player.frontLeftImg.src = "assets/graphics/wolf/wolf_fl_leg.png";
+GameAsset.player.frontRightImg = new Image();
+GameAsset.player.frontRightImg.src = "assets/graphics/wolf/wolf_fr_leg.png";
+GameAsset.player.backLeftImg = new Image();
+GameAsset.player.backLeftImg.src = "assets/graphics/wolf/wolf_bl_leg.png";
+GameAsset.player.backRightImg = new Image();
+GameAsset.player.backRightImg.src = "assets/graphics/wolf/wolf_br_leg.png";
 
 // Things
 var segmentImages = [GameAsset.player.headImg, 
@@ -108,7 +147,7 @@ var segmentImages = [GameAsset.player.headImg,
 var segmentSizes = [0.6,0.6,0.6,0.8];
 var segmentWidths =[0.6,0.5,0.6,0.2];
 var segmentOffsets=[-0.1,-0.15,-0.1,0];
-var segmentSpring =[1/10,1/5,1/10,1/10];
+var segmentSpring =[1,1/5,1/10,1/10];
 
 // Segments
 GameAsset.player.segments = [];
