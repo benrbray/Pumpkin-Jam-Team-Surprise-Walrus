@@ -7,7 +7,17 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // Tree Trunk
-GameAsset.treeTrunk = new GameAsset(1,1, false, "assets/graphics/tree_trunk.png");
+GameAsset.treeTrunk = new GameAsset(1,1, false, function(x,y,asset,obj){
+	context.save();
+	var randomRotation = (x + y * Math.E) % (Math.PI * 2);
+	context.translate(x + 0.5,y + 0.5);
+	context.rotate(randomRotation);
+	context.drawImage( GameAsset.treeTrunk.img, -0.5, -.5, 1, 1 );
+	context.restore();
+});
+GameAsset.treeTrunk.img = new Image();
+GameAsset.treeTrunk.img.src = "assets/graphics/tree_trunk.png";
+
 // Tree Body
 GameAsset.treeBody = new GameAsset(3,3, true, function(x,y,asset,obj){
 	context.globalAlpha = 0.75;

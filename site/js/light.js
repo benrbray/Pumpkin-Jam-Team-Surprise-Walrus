@@ -72,11 +72,6 @@ Light.prototype.drawLight = function(ctx, layer){
 
 
 
-
-
-
-
-
 var lightingCanvases = [];
 for (var k = 0; k < 3; k++) {
 	lightingCanvases.push(canvas());
@@ -111,7 +106,11 @@ function drawLighting() {
 	ctxs[0].globalAlpha = 0.333;
 	ctxs[0].drawImage(lightingCanvases[2],0,0);
 	// Multiply lighting onto main context:
-	contextmultiply(context,ctxs[0]);
+	try {
+		contextmultiply(context,ctxs[0]);
+	} catch(e) {
+		
+	}
 }
 
 
@@ -125,9 +124,9 @@ function contextmultiply(onto,other) {
 	var m = mult.data;
 
 	for (var i = 0; i < e.length; i += 4) {
-		e[i] = e[i] * m[i] / 255;
-		e[i+1] = e[i+1] * m[i+1] / 255;
-		e[i+2] = e[i+2] * m[i+2] / 255;
+		e[i] = e[i] * m[i] >> 8;
+		e[i+1] = e[i+1] * m[i+1] >> 8;
+		e[i+2] = e[i+2] * m[i+2] >> 8;
 	}
 
 	// Writes data to `onto`
