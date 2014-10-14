@@ -13,6 +13,8 @@ function GameObject(x, y, gameAsset, brain){
 	this.vy = 0;	// y velocity (tiles/frame)
 	this.wx = 0;	// Walking horizontal
 	this.wy = 0;	// Walking vertical
+	this.drawx = 1; // x component of direction vector
+	this.drawy = 0; // y component of direction vector
 	this.acceleration = 0.03;
 	this.maxSpeed = .11;
 	this.friction = 0.02;
