@@ -92,6 +92,8 @@ Sounds.brains = new Sounds.sound("assets/audio/brains.mp3");
 Sounds.lose = new Sounds.sound("assets/audio/lose.mp3");
 Sounds.win = new Sounds.audio("assets/audio/win.mp3");
 
+Sounds.gun.setVolume(.6);
+
 Sounds.musicMeadow.onload(function(){
 	this.play(true);
 	this.setVolume(0);

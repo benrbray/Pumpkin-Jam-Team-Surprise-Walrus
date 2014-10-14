@@ -96,8 +96,10 @@ function playerThink(player) {
 			if (player.attacks == 0) {
 				// heal player
 				player.health = Math.min( 9, player.health + 1 );
+				
 				// accumulate stats
-				if (player.attacktarget.human) Stat.humans++;
+				if (player.attacktarget.zombie) Stat.zombies++;
+				else if (player.attacktarget.human) Stat.humans++;
 				else Stat.animals++;
 				// kill animal
 				player.attacktarget.die();
@@ -110,6 +112,18 @@ function playerThink(player) {
 				splatter.depth = -1;
 				GameObject.add(splatter);
 				GameObject.fixDepth();
+				
+				// Check if all enemies are killed
+				var enemies = 0;
+				for (var i = 0; i < World.settlements.length; i++) {
+					for (var j = 0; j < GameObject.gameObjects.length; j++) {
+						if (GameObject.gameObjects[j].settlement == World.settlements[i]) {
+							enemies++;
+						}
+					}
+				}
+
+				if (enemies == 0) gameWin();
 			}
 		}
 	}
