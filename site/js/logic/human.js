@@ -26,7 +26,7 @@ function humanThink(h) {
 		h.friction = 0.01;
 		h.meat = true;
 		h.human = true;
-		h.armed = true;//Math.random() < 0.4;
+		h.armed = h.gameAsset === GameAsset.humanGun;//Math.random() < 0.4;
 		h.reload = 0;
 		h.firing = 0;
 		h.hits = 6;
@@ -48,6 +48,7 @@ function humanThink(h) {
 		// Panic!
 		h.wx = Math.cos(h.randomDirection);
 		h.wy = Math.sin(h.randomDirection);
+		Light.remove(this);
 		h.running--;
 		h.fear *= 0.99;
 	} else {

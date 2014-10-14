@@ -157,8 +157,8 @@ World.addTree = function(x, y){
 	GameObject.add(body);
 }
 
-World.addHuman = function(x,y){
-	var hu = new GameObject(x, y, GameAsset.humanPlain, humanThink);
+World.addHuman = function(x,y, gun){
+	var hu = new GameObject(x, y, gun ? GameAsset.humanGun : GameAsset.humanPlain, humanThink);
 	new Light(hu, 2, 0.5, 200, 200, 100);
 	GameObject.add(hu);
 }
