@@ -81,24 +81,34 @@ Sounds.audio = function(url){
 	}
 }
 
-Sounds.musicMeadow = new Sounds.audio("assets/audio/wandering.mp3");
-Sounds.musicAction = new Sounds.audio("assets/audio/action.mp3");
-Sounds.blood = new Sounds.sound("assets/audio/blood.mp3");
-Sounds.hoot = new Sounds.sound("assets/audio/owl_hoot.mp3");
-Sounds.bark = new Sounds.sound("assets/audio/angry_bark.mp3");
-Sounds.gun = new Sounds.sound("assets/audio/gun.mp3");
-Sounds.brains = new Sounds.sound("assets/audio/brains.mp3");
+if (typeof(MENUSCREEN) !== "undefined")
+{
+	Sounds.menuscreen = new Sounds.audio("assets/audio/title.mp3");
 
-Sounds.lose = new Sounds.sound("assets/audio/lose.mp3");
-Sounds.win = new Sounds.audio("assets/audio/win.mp3");
+	Sounds.menuscreen.onload(function(){
+		this.setVolume(.6);
+		this.play(true);
+	});
+} else {
+	Sounds.musicMeadow = new Sounds.audio("assets/audio/wandering.mp3");
+	Sounds.musicAction = new Sounds.audio("assets/audio/action.mp3");
+	Sounds.blood = new Sounds.sound("assets/audio/blood.mp3");
+	Sounds.hoot = new Sounds.sound("assets/audio/owl_hoot.mp3");
+	Sounds.bark = new Sounds.sound("assets/audio/angry_bark.mp3");
+	Sounds.gun = new Sounds.sound("assets/audio/gun.mp3");
+	Sounds.brains = new Sounds.sound("assets/audio/brains.mp3");
 
-Sounds.gun.setVolume(.6);
+	Sounds.lose = new Sounds.sound("assets/audio/lose.mp3");
+	Sounds.win = new Sounds.audio("assets/audio/win.mp3");
 
-Sounds.musicMeadow.onload(function(){
-	this.play(true);
-	this.setVolume(0);
-});
-Sounds.musicAction.onload(function(){
-	this.play(true);
-	this.setVolume(0);
-});
+	Sounds.gun.setVolume(.6);
+
+	Sounds.musicMeadow.onload(function(){
+		this.setVolume(0);
+		this.play(true);
+	});
+	Sounds.musicAction.onload(function(){
+		this.setVolume(0);
+		this.play(true);
+	});
+}
